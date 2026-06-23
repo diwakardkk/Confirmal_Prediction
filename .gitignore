@@ -1,0 +1,17 @@
+# Python environments and bytecode
+.venv/
+__pycache__/
+*.py[cod]
+
+# Local execution artefacts and large generated files
+outputs*/
+logs/*.out
+logs/*.err
+.cache/
+
+# Local source data; download from the documented public sources instead
+*.csv
+
+# Operating-system and editor files
+.DS_Store
+.vscode/
