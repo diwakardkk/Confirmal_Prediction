@@ -18,6 +18,11 @@ LIKELY_DATASET_NAMES = (
     "Cleaned_dataset.csv",
     "Balanced_dataset.csv",
 )
+PIMA_COLUMNS = {
+    "Pregnancies", "Glucose", "BloodPressure", "SkinThickness", "Insulin", "BMI",
+    "DiabetesPedigreeFunction", "Age", "Outcome",
+}
+PIMA_ZERO_AS_MISSING = ("Glucose", "BloodPressure", "SkinThickness", "Insulin", "BMI")
 
 
 @dataclass
@@ -27,6 +32,18 @@ class CleanedDataset:
     frame: pd.DataFrame
     audit: dict[str, Any]
     target_mapping: dict[str, str]
+    dataset_profile: str
+
+
+def resolve_dataset_profile(df: pd.DataFrame, requested: str) -> str:
+    """Resolve an explicit profile or identify the standard Pima schema."""
+    if requested not in {"auto", "generic", "pima"}:
+        raise ValueError("dataset profile must be one of: auto, generic, pima.")
+    if requested == "auto":
+        return "pima" if PIMA_COLUMNS.issubset(df.columns) else "generic"
+    if requested == "pima" and not PIMA_COLUMNS.issubset(df.columns):
+        raise ValueError("The Pima profile requires the standard Pima predictor columns and Outcome target.")
+    return requested
 
 
 def find_dataset(requested: str | None, search_roots: list[Path]) -> Path:
@@ -80,10 +97,11 @@ def _encode_binary_target(values: pd.Series) -> tuple[pd.Series, dict[str, str]]
     return encoded, {"0": str(negative), "1": str(positive)}
 
 
-def clean_dataset(df: pd.DataFrame, target_col: str) -> CleanedDataset:
+def clean_dataset(df: pd.DataFrame, target_col: str, dataset_profile: str = "generic") -> CleanedDataset:
     """Remove exact duplicates and ``gender=Other`` while preserving feature missingness."""
     if target_col not in df.columns:
         raise ValueError(f"Target column {target_col!r} is not present in the dataset.")
+    profile = resolve_dataset_profile(df, dataset_profile)
     original_rows = len(df)
     duplicates = int(df.duplicated().sum())
     cleaned = df.drop_duplicates().copy()
@@ -94,6 +112,12 @@ def clean_dataset(df: pd.DataFrame, target_col: str) -> CleanedDataset:
         other_mask = gender_text.eq("other").fillna(False)
         gender_other_rows = int(other_mask.sum())
         cleaned = cleaned.loc[~other_mask].copy()
+    zero_cells_converted = 0
+    if profile == "pima":
+        for column in PIMA_ZERO_AS_MISSING:
+            zero_mask = cleaned[column].eq(0)
+            zero_cells_converted += int(zero_mask.sum())
+            cleaned.loc[zero_mask, column] = np.nan
     encoded, mapping = _encode_binary_target(cleaned[target_col])
     cleaned[target_col] = encoded
     missing_by_column = cleaned.isna().sum()
@@ -115,8 +139,10 @@ def clean_dataset(df: pd.DataFrame, target_col: str) -> CleanedDataset:
         "diabetes_prevalence_percent": float(cleaned[target_col].mean() * 100),
         "missing_cells_total": int(missing_by_column.sum()),
         "missing_cells_by_column_json": json.dumps({k: int(v) for k, v in missing_by_column.items()}),
+        "dataset_profile": profile,
+        "zero_encoded_missing_cells_converted": zero_cells_converted,
     }
-    return CleanedDataset(cleaned.reset_index(drop=True), audit, mapping)
+    return CleanedDataset(cleaned.reset_index(drop=True), audit, mapping, profile)
 
 
 def create_balanced_dataset(df: pd.DataFrame, target_col: str, seed: int) -> pd.DataFrame:

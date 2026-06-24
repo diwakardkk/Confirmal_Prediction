@@ -1,0 +1,358 @@
+PAPER DETAILS SUMMARY
+=====================
+
+Proposed title
+--------------
+Diabetes Status Classification with Calibrated XGBoost and Conformal Prediction: External Transportability and Reliability Assessment
+
+Study purpose
+-------------
+This study develops a reproducible machine-learning workflow for diabetes-status classification using demographic and clinical variables. The primary goals are to: (1) compare standard machine-learning classifiers; (2) select and calibrate XGBoost; (3) quantify uncertainty using standard split conformal prediction and class-conditional (Mondrian) conformal prediction; (4) assess clinically relevant sensitivity-specificity trade-offs; and (5) report uncertainty, subgroup performance, and reproducibility artefacts transparently.
+
+The study should be presented as diabetes-status classification using the variables available in the public dataset. It should not be presented as a prospective early-diagnosis system, an autonomous clinical tool, or a ready-to-deploy diagnostic device. HbA1c and blood glucose are closely related to clinical diabetes assessment and contribute strongly to the observed predictive performance.
+
+Primary dataset
+---------------
+Source: Diabetes Prediction Dataset, Kaggle (Mohammed Mustafa).
+Input file: diabetes_prediction_dataset.csv
+Raw rows: 100,000
+Raw columns: 9
+Target: diabetes (0 = no diabetes, 1 = diabetes)
+
+Predictors:
+  1. gender
+  2. age
+  3. hypertension
+  4. heart_disease
+  5. smoking_history
+  6. bmi
+  7. HbA1c_level
+  8. blood_glucose_level
+
+Cleaning and primary data composition
+-------------------------------------
+Exact duplicate rows removed: 3,854
+Rows after duplicate removal: 96,146
+Rows with gender = Other removed: 18
+Final primary dataset: 96,128
+Missing cells after cleaning: 0
+Class 0 (no diabetes): 87,646
+Class 1 (diabetes): 8,482
+Observed diabetes prevalence: 8.8237%
+
+The original class prevalence is retained for all primary claims. A separately generated under-sampled 50/50 dataset is used only as a secondary sensitivity analysis.
+
+Fixed data partition
+--------------------
+Random seed: 42
+Split method: stratified 60/20/20 train/calibration/test split
+
+Split          Total     Class 0    Class 1    Diabetes prevalence
+Train          57,676    52,587     5,089      8.8234%
+Calibration    19,226    17,529     1,697      8.8266%
+Test           19,226    17,530     1,696      8.8214%
+
+Preprocessing
+-------------
+Numeric predictors: median imputation.
+Categorical predictors: most-frequent imputation and one-hot encoding.
+Logistic regression and SVM: numeric standardization in the training pipeline.
+Decision tree, random forest, and XGBoost: no numeric standardization.
+All transformations are fitted within model pipelines to prevent information leakage.
+
+Proposed model
+--------------
+Final point-prediction model: probability-calibrated XGBoost classifier.
+
+Base algorithm:
+  - XGBoost binary logistic classifier
+  - Objective: binary:logistic
+  - Evaluation metric during fitting: log loss
+
+Model selection:
+  - Five-fold stratified cross-validation on the training partition only
+  - Selection criterion: ROC-AUC
+
+Selected XGBoost hyperparameters:
+  - n_estimators: 600
+  - max_depth: 3
+  - learning_rate: 0.05
+  - subsample: 1.0
+  - colsample_bytree: 0.8
+  - min_child_weight: 1
+  - reg_lambda: 5.0
+  - Best cross-validated ROC-AUC: 0.9799
+
+Probability calibration:
+  - Sigmoid calibration
+  - Five-fold cross-validation within the training partition
+  - The held-out calibration partition is NOT used to refit the point-prediction model.
+
+Uncertainty model:
+  1. Standard split conformal prediction.
+  2. Class-conditional (Mondrian) split conformal prediction.
+
+For calibration observation (x_i, y_i), the nonconformity score is:
+  s_i = 1 - p_model(y_i | x_i)
+
+Standard split conformal uses one finite-sample threshold for both classes.
+Mondrian conformal uses independent finite-sample thresholds for class 0 and class 1.
+
+For a test record, a class is included in the conformal set when:
+  1 - p_model(class | x) <= conformal threshold
+
+Coverage definition:
+  Coverage is the proportion of test records for which the observed label is included in the prediction set. Coverage is NOT the proportion of non-empty sets.
+
+Candidate models and primary test results
+-----------------------------------------
+Model                 Accuracy  Balanced Acc.  Precision  Sensitivity  Specificity  F1      ROC-AUC  PR-AUC
+Logistic Regression   0.8864    0.8815         0.4293     0.8756       0.8874       0.5761  0.9595   0.8114
+SVM                   0.9588    0.8120         0.8621     0.6338       0.9902       0.7305  0.9584   0.8125
+Decision Tree         0.9710    0.8475         0.9641     0.6975       0.9975       0.8094  0.9711   0.8626
+Random Forest         0.9041    0.9008         0.4768     0.8968       0.9048       0.6226  0.9737   0.8734
+Calibrated XGBoost    0.9702    0.8566         0.9270     0.7188       0.9945       0.8097  0.9777   0.8826
+
+Final XGBoost default-threshold results
+----------------------------------------
+Probability threshold: 0.5
+Accuracy: 0.9702
+Balanced accuracy: 0.8566
+Precision / positive predictive value: 0.9270
+Sensitivity / recall: 0.7188
+Specificity: 0.9945
+F1-score: 0.8097
+ROC-AUC: 0.9777
+PR-AUC: 0.8826
+Brier score: 0.0250
+Log loss: 0.0973
+Mean inference time: 0.00374 ms per test sample
+
+Confusion matrix at threshold 0.5
+---------------------------------
+True negatives: 17,434
+False positives: 96
+False negatives: 477
+True positives: 1,219
+
+Important interpretation:
+The high accuracy and specificity at 0.5 occur in a low-prevalence dataset. The default threshold misses 477 of 1,696 diabetes-positive test observations. Accuracy alone must not be used to describe clinical usefulness.
+
+Bootstrap 95% confidence intervals (1,000 stratified test resamples)
+---------------------------------------------------------------------
+Metric              Estimate   95% CI lower   95% CI upper
+Accuracy            0.9702     0.9681          0.9723
+Balanced accuracy   0.8566     0.8465          0.8671
+Precision           0.9270     0.9136          0.9391
+Sensitivity         0.7188     0.6987          0.7394
+Specificity         0.9945     0.9934          0.9955
+F1-score            0.8097     0.7943          0.8245
+ROC-AUC             0.9777     0.9751          0.9801
+PR-AUC              0.8826     0.8712          0.8932
+Brier score         0.0250     0.0234          0.0266
+
+Clinical operating-threshold analysis
+--------------------------------------
+Thresholds were selected using five-fold out-of-fold calibrated probabilities from training data only. The untouched test partition was used only for final evaluation.
+
+Target training     Threshold  Test sens.  Test spec.  PPV     NPV     False negatives  False positives
+Default 0.5         0.5000     0.7188      0.9945      0.9270  0.9734  477              96
+85% sensitivity     0.0788     0.8396      0.9517      0.6270  0.9840  272              847
+90% sensitivity     0.0442     0.8886      0.9217      0.5234  0.9884  189              1,372
+95% sensitivity     0.0253     0.9410      0.8766      0.4245  0.9935  100              2,164
+
+Interpretation:
+Lowering the threshold improves sensitivity and reduces missed positive cases, but increases false-positive classifications. The appropriate threshold depends on the intended screening pathway, availability of confirmatory testing, and acceptable false-positive burden. The manuscript should not select a threshold post hoc as universally optimal.
+
+Standard split conformal prediction results
+-------------------------------------------
+Confidence  Overall coverage  Class 0 coverage  Class 1 coverage  Mean set size  Empty-set rate
+50%         0.5078            0.4912            0.6798            0.5078         0.4922
+60%         0.6059            0.5987            0.6798            0.6059         0.3941
+70%         0.6997            0.7017            0.6798            0.6999         0.3001
+80%         0.7978            0.8092            0.6798            0.7999         0.2001
+90%         0.8984            0.9194            0.6810            0.9081         0.0919
+95%         0.9494            0.9740            0.6946            0.9699         0.0301
+
+Interpretation:
+Standard split conformal prediction meets marginal coverage approximately, but diabetes-class coverage remains substantially below nominal confidence. Standard split conformal should therefore be reported as a comparator, not as the primary reliability method.
+
+Mondrian conformal prediction results
+-------------------------------------
+Confidence  Overall coverage  Class 0 coverage  Class 1 coverage  Mean set size  Doubleton rate  Empty-set rate
+50%         0.5058            0.5048            0.5165            0.5058         0.0000          0.4942
+60%         0.6055            0.6043            0.6179            0.6055         0.0000          0.3945
+70%         0.6995            0.6985            0.7099            0.7034         0.0000          0.2966
+80%         0.7962            0.7957            0.8013            0.8278         0.0000          0.1722
+90%         0.8975            0.8973            0.8998            0.9825         0.0000          0.0175
+95%         0.9485            0.9484            0.9493            1.0860         0.0860          0.0000
+
+Primary conformal conclusion:
+Mondrian conformal prediction is the primary uncertainty method because it produces near-nominal coverage for both classes at 90% and 95% confidence. At 95% confidence, 8.60% of predictions contain both labels. These doubleton sets should be interpreted as explicit model uncertainty, not as a failure of the method.
+
+Conformal bootstrap example at 90% confidence
+---------------------------------------------
+Standard split conformal:
+  Overall coverage: 0.8984 (95% CI, 0.8942-0.9024)
+  Class 0 coverage: 0.9194 (95% CI, 0.9152-0.9234)
+  Class 1 coverage: 0.6810 (95% CI, 0.6592-0.7023)
+
+Full Mondrian bootstrap confidence intervals are provided in:
+  table_08d_conformal_bootstrap_confidence_intervals_original_prevalence.csv
+
+Calibration-size sensitivity analysis
+-------------------------------------
+Standard split-conformal mean empirical coverage across ten stratified repetitions:
+
+Calibration fraction  Calibration n  80% coverage mean (SD)  90% coverage mean (SD)  95% coverage mean (SD)
+10%                   1,922          0.7970 (0.0080)         0.8962 (0.0062)         0.9490 (0.0025)
+20%                   3,845          0.7965 (0.0078)         0.8959 (0.0043)         0.9484 (0.0029)
+30%                   5,767          0.7964 (0.0032)         0.8966 (0.0020)         0.9480 (0.0026)
+50%                   9,613          0.7970 (0.0020)         0.8974 (0.0015)         0.9482 (0.0012)
+100%                  19,226         0.7978 (0.0000)         0.8984 (0.0000)         0.9494 (0.0000)
+
+Interpretation:
+Marginal coverage remains near the requested confidence levels. Smaller calibration subsets produce more variable coverage estimates.
+
+Interpretability results
+------------------------
+Permutation importance measured as the mean decrease in test ROC-AUC after permutation:
+
+Feature                Mean importance  Standard deviation
+HbA1c_level            0.14545          0.00435
+blood_glucose_level    0.09535          0.00195
+age                    0.01881          0.00130
+bmi                    0.00638          0.00076
+smoking_history        0.00112          0.00017
+hypertension           0.00074          0.00019
+heart_disease          0.00064          0.00013
+gender                 0.00026          0.00013
+
+SHAP importance produces the same qualitative ordering: HbA1c level, blood glucose level, age, and BMI are leading features. Feature importance is associational and must not be interpreted as causal effect estimation.
+
+Selected subgroup point-prediction results at threshold 0.5
+------------------------------------------------------------
+Subgroup                 n       Diabetes prevalence  Sensitivity  Specificity  ROC-AUC
+Female                   11,178  8.21%                0.7157       0.9966       0.9787
+Male                     8,048   9.67%                0.7224       0.9916       0.9761
+Age <30                  6,207   1.10%                0.6765       1.0000       0.9792
+Age 30-44                3,855   4.36%                0.6190       1.0000       0.9651
+Age 45-59                4,378   11.22%               0.7088       0.9954       0.9664
+Age 60+                  4,786   20.25%               0.7441       0.9796       0.9603
+No hypertension          17,743  7.32%                0.6988       0.9975       0.9774
+Hypertension             1,483   26.84%               0.7839       0.9493       0.9568
+No heart disease         18,430  7.86%                0.7017       0.9965       0.9769
+Heart disease            796     31.16%               0.8185       0.9343       0.9619
+
+Subgroup interpretation:
+Subgroup results are descriptive. They are not statistical tests of fairness, do not imply causal differences, and do not establish performance in populations not represented by this public dataset. Standard conformal subgroup coverage varies substantially, especially among older and comorbid groups. Mondrian conformal improves class-wise coverage, but it does not guarantee coverage within every demographic or clinical subgroup.
+
+Balanced sensitivity analysis
+-----------------------------
+The separately under-sampled balanced sensitivity dataset contains 16,964 records: 8,482 class-0 and 8,482 class-1 records.
+
+Calibrated XGBoost results on the balanced sensitivity test set:
+Accuracy: 0.9045
+Balanced accuracy: 0.9045
+Sensitivity: 0.9092
+Specificity: 0.8998
+F1-score: 0.9049
+ROC-AUC: 0.9767
+PR-AUC: 0.9778
+Brier score: 0.0656
+
+These balanced results are secondary only. Accuracy, precision, PR-AUC, probability calibration, and predictive values are prevalence-dependent; therefore, they must not replace the original-prevalence primary results.
+
+Secondary Pima benchmark analysis
+---------------------------------
+Dataset: Pima Indians Diabetes Database
+Population: 768 adult women of Pima Indian heritage
+Positive outcomes: 268 (34.9%)
+Preprocessing: zero values in Glucose, BloodPressure, SkinThickness, Insulin, and BMI were converted to missing values before split-safe imputation. Pregnancies equal to zero were retained as valid values.
+
+Pima calibrated XGBoost test results:
+  ROC-AUC: 0.8211 (95% CI, 0.7468--0.8839)
+  PR-AUC: 0.7125 (95% CI, 0.6174--0.8122)
+  Sensitivity at threshold 0.5: 0.5370
+  Specificity at threshold 0.5: 0.8500
+  Sensitivity at training-selected 95% target: 0.9630
+  Specificity at training-selected 95% target: 0.4400
+
+Interpretation: Pima is a secondary benchmark of workflow reproducibility. It must not be pooled with primary results or described as direct external validation. Logistic regression and SVM had slightly higher cross-validated ROC-AUC values than XGBoost on this small benchmark, and the 154-record test set had only 54 positive cases.
+
+NHANES external transportability evaluation
+-------------------------------------------
+Cycle: NHANES 2017--2018
+External cohort: 2,291 adults
+Diabetes-positive participants: 403 (17.59%)
+External outcome: DIQ010 self-reported clinician-diagnosed diabetes, coded yes versus no. Borderline, unknown, refused, and missing responses were excluded.
+Model scope: a separately trained five-feature harmonized reduced model using sex, age, BMI, HbA1c, and fasting glucose. This is not validation of the full eight-feature primary model.
+
+Internal source reduced-model test results:
+  ROC-AUC: 0.9762
+  PR-AUC: 0.8765
+  Brier score: 0.0256
+
+NHANES unweighted external results:
+  Accuracy: 0.9118
+  Sensitivity: 0.6055
+  Specificity: 0.9772
+  F1-score: 0.7072
+  ROC-AUC: 0.9326 (95% CI, 0.9186--0.9461)
+  PR-AUC: 0.7708 (95% CI, 0.7303--0.8168)
+  Brier score: 0.0811 (95% CI, 0.0715--0.0900)
+
+NHANES survey-weighted sensitivity analysis:
+  ROC-AUC: 0.9571
+  PR-AUC: 0.8154
+  Brier score: 0.0505
+
+External threshold transport:
+  Source target 85% sensitivity -> NHANES sensitivity 0.6824, specificity 0.9682
+  Source target 90% sensitivity -> NHANES sensitivity 0.6998, specificity 0.9645
+  Source target 95% sensitivity -> NHANES sensitivity 0.7246, specificity 0.9576
+
+External conformal transport:
+  Standard conformal, nominal 90%: class-0 coverage 0.9656; class-1 coverage 0.5236.
+  Mondrian conformal, nominal 90%: class-0 coverage 0.9613; class-1 coverage 0.7022.
+  Mondrian conformal, nominal 95%: class-0 coverage 0.9688; class-1 coverage 0.7270.
+
+NHANES interpretation:
+External discrimination remained strong, but calibration, source-selected thresholds, and conformal coverage did not fully transport. The paper must state that target-domain recalibration of probabilities, decision thresholds, and conformal scores is required before any clinical deployment claim.
+
+Recommended manuscript message
+------------------------------
+The paper's central result is not simply that XGBoost achieved high ROC-AUC. The defensible contribution is a reproducible evaluation showing that:
+  - point-prediction performance changes materially with the operating threshold;
+  - standard conformal prediction can satisfy marginal coverage while under-covering the diabetes class;
+  - Mondrian conformal prediction recovers near-nominal class-wise coverage while exposing uncertainty through prediction-set size;
+  - all estimates are accompanied by fixed splits, bootstrap confidence intervals, calibration evaluation, and descriptive subgroup analyses.
+
+Limitations that must remain in the paper
+------------------------------------------
+1. NHANES evaluates a five-feature harmonized reduced model, not the full eight-feature primary model.
+2. The NHANES outcome is self-reported clinician-diagnosed diabetes and differs from the source outcome definition.
+3. HbA1c and blood glucose are closely related to diabetes assessment; the model is not evidence of pre-diagnostic prediction.
+4. Conformal validity assumes exchangeability between calibration and future observations; NHANES empirically shows that source conformal thresholds did not fully transport.
+5. Mondrian conformal provides class-conditional, not demographic-group-conditional, coverage.
+6. Subgroup analyses are descriptive and may have small event counts in some strata.
+7. The Pima analysis is a small secondary benchmark, not direct external validation.
+8. The balanced sensitivity analysis does not represent the observed disease prevalence.
+
+Required files for the paper package
+------------------------------------
+Main manuscript: main.tex
+Bibliography: ref.bib
+Figures: figures/
+Selected manuscript tables: tables/
+Full generated results: results/
+Reproducibility code: https://github.com/diwakardkk/Confirmal_Prediction
+
+Before journal submission
+-------------------------
+1. Replace author, affiliation, email, funding, DOI, and ethics placeholders in main.tex.
+2. Update the GitHub repository with the final Pima and NHANES transportability code.
+3. Tag the final code release and archive it with a DOI, for example through Zenodo.
+4. Compile using the official IEEE Access LaTeX template.
+5. Verify every bibliography entry and journal-specific declaration.
+6. Use only values from the generated CSV/XLSX tables; do not reuse any old balanced-dataset manuscript numbers.

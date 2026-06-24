@@ -13,6 +13,7 @@ class RunConfig:
     data_path: Path
     outdir: Path
     target: str = "diabetes"
+    dataset_profile: str = "generic"
     seed: int = 42
     device_requested: str = "auto"
     dpi: int = 600

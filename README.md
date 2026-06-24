@@ -1,4 +1,4 @@
-# Reliable Diabetes Risk Prediction Using Calibrated XGBoost and Conformal Prediction
+# Diabetes Status Classification with Calibrated XGBoost and Conformal Prediction
 
 This project regenerates reproducible tables, figures, fitted models, logs, and a manifest for an IEEE Access manuscript. The primary analysis uses the cleaned dataset at its observed class prevalence. Optional balanced under-sampling is strictly a secondary sensitivity analysis.
 
@@ -47,6 +47,43 @@ python3 run_pipeline.py \
   --analysis-description "BRFSS 2015 externally supplied balanced 50/50 dataset"
 ```
 
+## Pima Indians dataset
+
+The standard Pima file uses `Outcome` as its binary target. In the Pima profile, zeros in `Glucose`, `BloodPressure`, `SkinThickness`, `Insulin`, and `BMI` are treated as unavailable physiological measurements and converted to missing values before split-safe median imputation. Zero pregnancies remain valid and are retained.
+
+```bash
+python3 run_pipeline.py \
+  --data ../diabetes.csv \
+  --outdir outputs_pima_secondary \
+  --target Outcome \
+  --dataset-profile pima \
+  --seed 42 \
+  --device cpu \
+  --dpi 600 \
+  --bootstrap-repeats 1000 \
+  --experiment-label pima_secondary \
+  --analysis-description "Pima Indians Diabetes Database secondary benchmark analysis"
+```
+
+The Pima analysis is a separate benchmark study. Its population, predictors, outcome ascertainment, and observed prevalence differ from the primary dataset; therefore, its performance metrics should not be pooled with or described as direct external validation of the original model.
+
+## NHANES 2017--2018 external transportability evaluation
+
+The dedicated NHANES workflow creates a reduced model using only the five features harmonized across the source and NHANES data: sex, age, BMI, HbA1c, and fasting glucose. The reduced model is trained and calibrated only on the source dataset, then applied unchanged to the NHANES cohort. NHANES outcomes are derived from `DIQ010` self-reported clinician-diagnosed diabetes; this is an external transportability analysis, not direct validation of the full primary model.
+
+Required NHANES files in one directory: `DEMO_J.xpt`, `DIQ_J.xpt`, `BMX_J.xpt`, `BPX_J.xpt`, `GHB_J.xpt`, and `GLU_J.xpt`.
+
+```bash
+python3 run_nhanes_external_validation.py \
+  --source-data ../diabetes_prediction_dataset.csv \
+  --nhanes-dir ../NHANES \
+  --outdir outputs_nhanes_external \
+  --seed 42 \
+  --device cpu \
+  --dpi 600 \
+  --bootstrap-repeats 1000
+```
+
 If `--data` is omitted, the runner searches likely CSV names in the current folder, this project folder, and its parent folder.
 
 ## Output structure
@@ -60,6 +97,14 @@ If `--data` is omitted, the runner searches likely CSV names in the current fold
 - `outputs/reproducibility_manifest.json`: dataset fingerprint, versions, seed, features, best parameters, device, and generated artefacts.
 
 The primary manuscript results use files suffixed `original_prevalence`. Files suffixed `balanced_sensitivity` are secondary only and must not replace the primary results.
+
+## Interpretation and reporting boundaries
+
+This repository implements **diabetes-status classification**, not a prospective diagnostic replacement or autonomous clinical decision system. HbA1c and blood glucose are closely related to diabetes assessment and are intentionally retained as available predictors; results must therefore not be described as pre-diagnostic risk prediction.
+
+The primary model is evaluated internally on the original-prevalence source dataset. Pima is a secondary benchmark only. NHANES is an external transportability evaluation of a separately trained, five-feature harmonized reduced model; it is not validation of the full primary eight-feature model.
+
+The completed NHANES experiment demonstrated strong external discrimination but reduced calibration quality and incomplete transport of source-derived operating thresholds and conformal coverage. In particular, a source-selected threshold targeting 95% sensitivity achieved 72.46% sensitivity in NHANES, and source-calibrated Mondrian conformal prediction achieved 70.22% diabetes-class coverage at nominal 90% confidence. These results should be reported as evidence that target-domain recalibration is required before use in a new population.
 
 ## Reliability and clinical robustness analyses
 

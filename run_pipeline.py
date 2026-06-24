@@ -96,6 +96,10 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--data", default=None, help="CSV path. If omitted, likely dataset filenames are searched.")
     parser.add_argument("--outdir", default="outputs", help="Output directory (default: outputs).")
     parser.add_argument("--target", default="diabetes", help="Binary target column (default: diabetes).")
+    parser.add_argument(
+        "--dataset-profile", default="auto", choices=("auto", "generic", "pima"),
+        help="Dataset-specific cleaning profile (default: auto).",
+    )
     parser.add_argument("--seed", default=42, type=int, help="Random seed (default: 42).")
     parser.add_argument("--device", default="auto", choices=("auto", "cpu", "cuda"), help="XGBoost device selection.")
     parser.add_argument("--dpi", default=600, type=int, help="PNG resolution (default: 600).")
@@ -334,6 +338,7 @@ def main() -> None:
     data_path = find_dataset(args.data, [Path.cwd(), project_dir, project_dir.parent])
     config = RunConfig(
         data_path=data_path, outdir=Path(args.outdir).expanduser().resolve(), target=args.target,
+        dataset_profile=args.dataset_profile,
         seed=args.seed, device_requested=args.device, dpi=args.dpi, bootstrap_repeats=args.bootstrap_repeats, quick=args.quick,
         run_balanced_sensitivity=args.run_balanced_sensitivity,
     )
@@ -343,8 +348,8 @@ def main() -> None:
     np.random.seed(config.seed)
     logger.info("Loading dataset from %s", config.data_path)
     raw = load_dataset(config.data_path)
-    cleaned = clean_dataset(raw, config.target)
-    logger.info("Cleaned data: %d rows; %d duplicate rows and %d gender=Other rows removed.", cleaned.audit["final_rows"], cleaned.audit["duplicate_rows_removed"], cleaned.audit["gender_other_rows_removed"])
+    cleaned = clean_dataset(raw, config.target, config.dataset_profile)
+    logger.info("Cleaned data (%s profile): %d rows; %d duplicate rows, %d gender=Other rows, and %d zero-encoded missing cells handled.", cleaned.dataset_profile, cleaned.audit["final_rows"], cleaned.audit["duplicate_rows_removed"], cleaned.audit["gender_other_rows_removed"], cleaned.audit["zero_encoded_missing_cells_converted"])
     write_table(pd.DataFrame([cleaned.audit]), paths["tables"] / "table_01_data_cleaning_summary.csv", logger)
     device = resolve_xgboost_device(config.device_requested, logger)
     experiment_label = args.experiment_label
@@ -375,6 +380,7 @@ def main() -> None:
         "random_seed": config.seed, "dataset_path": str(config.data_path), "dataset_hash_sha256": sha256_file(config.data_path),
         "original_rows": int(len(raw)), "cleaned_rows": int(len(cleaned.frame)), "target_column": config.target,
         "target_mapping": cleaned.target_mapping, "feature_columns": cleaned.frame.drop(columns=[config.target]).columns.tolist(),
+        "dataset_profile": cleaned.dataset_profile,
         "numeric_features": numeric_features, "categorical_features": categorical_features,
         "train_size": primary_split_sizes["train"], "calibration_size": primary_split_sizes["calibration"], "test_size": primary_split_sizes["test"],
         "model_list": list(MODEL_ORDER), "best_params": all_best_params,
