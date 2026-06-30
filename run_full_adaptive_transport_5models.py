@@ -712,6 +712,60 @@ def plot_dataset_shift(datasets: dict[str, pd.DataFrame], paths: Paths, dpi: int
         fig.savefig(paths.figures / filename, dpi=dpi)
         plt.close(fig)
 
+    available_targets = [target for target, _ in comparisons if target in datasets]
+    if available_targets:
+        fig, axes = plt.subplots(len(available_targets), len(features), figsize=(22, 5.4 * len(available_targets)), squeeze=False)
+        for row_idx, target_name in enumerate(available_targets):
+            long = pd.concat([
+                datasets["Kaggle"].assign(dataset="Kaggle"),
+                datasets[target_name].assign(dataset=target_name),
+            ], ignore_index=True)
+            for col_idx, feature in enumerate(features):
+                ax = axes[row_idx, col_idx]
+                plot_data = long.loc[long[feature].notna(), ["dataset", feature]]
+                sns.histplot(
+                    data=plot_data,
+                    x=feature,
+                    hue="dataset",
+                    stat="density",
+                    common_norm=False,
+                    bins=28,
+                    ax=ax,
+                    element="step",
+                    fill=False,
+                    linewidth=2.9,
+                    palette={name: colors[name] for name in plot_data["dataset"].unique()},
+                )
+                if row_idx == 0:
+                    ax.set_title(feature.replace("_", " ").title(), fontsize=24, pad=14)
+                else:
+                    ax.set_title("")
+                ax.set_xlabel(feature.replace("_", " ").title(), fontsize=21, labelpad=8)
+                ax.set_ylabel("")
+                ax.tick_params(axis="both", labelsize=17)
+                legend = ax.get_legend()
+                if legend is not None:
+                    legend.set_title("")
+                    for text in legend.get_texts():
+                        text.set_fontsize(16)
+                    legend.get_frame().set_alpha(0.92)
+        row_centers = np.linspace(0.73, 0.27, len(available_targets))
+        for y_pos, target_name in zip(row_centers, available_targets):
+            fig.text(
+                0.04,
+                y_pos,
+                f"Kaggle vs {target_name}",
+                rotation=90,
+                va="center",
+                ha="center",
+                fontsize=23,
+                fontweight="bold",
+            )
+        fig.supylabel("Density", fontsize=24, x=0.006)
+        fig.tight_layout(h_pad=3.0, w_pad=2.0, rect=(0.075, 0, 1, 1))
+        fig.savefig(paths.figures / "figure_01_feature_histograms_combined.png", dpi=dpi)
+        plt.close(fig)
+
 
 def plot_low_dimensional_shift(datasets: dict[str, pd.DataFrame], paths: Paths, seed: int, max_rows: int, dpi: int) -> None:
     features = FEATURE_SETS["model_b_routine_clinical"]
