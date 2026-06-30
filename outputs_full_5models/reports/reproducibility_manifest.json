@@ -1,0 +1,68 @@
+{
+  "analysis": "Adaptive Transport Calibration: Reliable Clinical Machine Learning Under Dataset Shift",
+  "source_data": "/Users/prabhavkumar/Diwakar/Confirmal_prediction/Final_mycode_CP/diabetes_prediction_dataset.csv",
+  "pima_data": "/Users/prabhavkumar/Diwakar/Confirmal_prediction/Final_mycode_CP/diabetes.csv",
+  "nhanes_dir": "/Users/prabhavkumar/Diwakar/Confirmal_prediction/Final_mycode_CP/NHANES",
+  "seed": 42,
+  "dpi": 500,
+  "quick": false,
+  "source_rows_used": 96128,
+  "datasets": {
+    "Kaggle": 96128,
+    "NHANES": 2291,
+    "Pima": 768
+  },
+  "feature_sets": {
+    "model_a_screening": [
+      "age",
+      "sex",
+      "bmi",
+      "hypertension",
+      "heart_disease",
+      "smoking_history"
+    ],
+    "model_b_routine_clinical": [
+      "age",
+      "sex",
+      "bmi",
+      "hypertension",
+      "heart_disease",
+      "smoking_history",
+      "glucose",
+      "hba1c"
+    ],
+    "model_c_extended_transport": [
+      "age",
+      "sex",
+      "bmi",
+      "hypertension",
+      "heart_disease",
+      "smoking_history",
+      "glucose",
+      "hba1c",
+      "blood_pressure",
+      "insulin",
+      "pregnancies",
+      "diabetes_pedigree"
+    ]
+  },
+  "calibration_methods": [
+    "uncalibrated",
+    "platt",
+    "temperature",
+    "isotonic",
+    "beta"
+  ],
+  "conformal_methods": [
+    "split_conformal_source_calibration",
+    "adaptive_transport_conformal"
+  ],
+  "models_run": [
+    "Logistic Regression",
+    "Random Forest",
+    "XGBoost",
+    "LightGBM",
+    "CatBoost"
+  ],
+  "optional_models_skipped": []
+}

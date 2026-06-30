@@ -1,0 +1,18 @@
+2026-06-30 09:04:47,486 | INFO | Loading datasets
+2026-06-30 09:05:04,433 | INFO | Training source models and evaluating calibration methods
+2026-06-30 09:05:04,440 | INFO | Fitting model_a_screening / Logistic Regression
+2026-06-30 09:05:08,827 | INFO | Fitting model_a_screening / Random Forest
+2026-06-30 09:05:18,719 | INFO | Fitting model_a_screening / XGBoost
+2026-06-30 09:05:23,963 | INFO | Fitting model_a_screening / LightGBM
+2026-06-30 09:05:30,569 | INFO | Fitting model_a_screening / CatBoost
+2026-06-30 09:05:36,486 | INFO | Fitting model_b_routine_clinical / Logistic Regression
+2026-06-30 09:05:41,079 | INFO | Fitting model_b_routine_clinical / Random Forest
+2026-06-30 09:05:50,319 | INFO | Fitting model_b_routine_clinical / XGBoost
+2026-06-30 09:05:55,737 | INFO | Fitting model_b_routine_clinical / LightGBM
+2026-06-30 09:06:02,590 | INFO | Fitting model_b_routine_clinical / CatBoost
+2026-06-30 09:06:08,438 | INFO | Fitting model_c_extended_transport / Logistic Regression
+2026-06-30 09:06:12,929 | INFO | Fitting model_c_extended_transport / Random Forest
+2026-06-30 09:06:22,315 | INFO | Fitting model_c_extended_transport / XGBoost
+2026-06-30 09:06:27,660 | INFO | Fitting model_c_extended_transport / LightGBM
+2026-06-30 09:06:34,530 | INFO | Fitting model_c_extended_transport / CatBoost
+2026-06-30 09:06:42,885 | INFO | Completed. Outputs: /Users/prabhavkumar/Diwakar/Confirmal_prediction/Final_mycode_CP/adaptive_transport_calibration_experiment/outputs_full_5models

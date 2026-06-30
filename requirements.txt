@@ -1,9 +1,14 @@
 numpy
 pandas
+scipy
 scikit-learn
-xgboost
 matplotlib
 seaborn
 joblib
-openpyxl
-shap
+xgboost
+umap-learn
+Pillow
+
+# Optional model families used automatically when installed:
+# lightgbm
+# catboost

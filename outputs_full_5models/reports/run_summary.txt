@@ -1,0 +1,17 @@
+Adaptive Transport Calibration experiment completed.
+
+Rows used:
+- Kaggle source: 96128
+- NHANES external: 2291
+- Pima external: 768
+
+Outputs are inside: /Users/prabhavkumar/Diwakar/Confirmal_prediction/Final_mycode_CP/adaptive_transport_calibration_experiment/outputs_full_5models
+Figures were saved at 500 dpi with enlarged publication fonts.
+
+Key tables:
+- table_03_dataset_shift_metrics.csv
+- table_05_calibration_method_metrics_all_datasets.csv
+- table_07_external_transportability_scenarios.csv
+- table_08_conformal_atcp_comparison.csv
+- table_09_fairness_subgroup_metrics.csv
+- table_13_transport_reliability_score.csv

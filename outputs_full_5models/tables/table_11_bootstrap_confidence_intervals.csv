@@ -1,0 +1,361 @@
+target_dataset,feature_set,model,scenario,calibration_method,metric,estimate,ci_95_lower,ci_95_upper,bootstrap_repeats
+NHANES,model_a_screening,Logistic Regression,naive_transfer,uncalibrated,roc_auc,0.7755732505453935,0.7442456394739051,0.8066490812216814,1000
+NHANES,model_a_screening,Logistic Regression,naive_transfer,uncalibrated,brier_score,0.28515653725992784,0.27091390879897764,0.29878909771297457,1000
+NHANES,model_a_screening,Logistic Regression,naive_transfer,uncalibrated,ece,0.37755171405365245,0.3635606377884204,0.3910074317523446,1000
+NHANES,model_a_screening,Logistic Regression,naive_transfer,uncalibrated,coverage,0.622109947643979,0.5951134380453752,0.6483420593368238,1000
+NHANES,model_a_screening,Logistic Regression,fixed_recalibration,beta,roc_auc,0.7755732505453935,0.7442456394739051,0.8066490812216814,1000
+NHANES,model_a_screening,Logistic Regression,fixed_recalibration,beta,brier_score,0.12501804056355895,0.1204660022208287,0.12962613070402598,1000
+NHANES,model_a_screening,Logistic Regression,fixed_recalibration,beta,ece,0.024452051528559317,0.011996081885207177,0.04024905958800342,1000
+NHANES,model_a_screening,Logistic Regression,fixed_recalibration,beta,coverage,0.8150523560209424,0.8089005235602095,0.8202443280977313,1000
+NHANES,model_a_screening,Logistic Regression,adaptive_calibration,isotonic,roc_auc,0.7728817151577446,0.7408764578788386,0.8034857987917436,1000
+NHANES,model_a_screening,Logistic Regression,adaptive_calibration,isotonic,brier_score,0.12515305962258066,0.12038528445423677,0.13002516121144878,1000
+NHANES,model_a_screening,Logistic Regression,adaptive_calibration,isotonic,ece,0.02279357486886973,0.009940643111233122,0.039151988765660214,1000
+NHANES,model_a_screening,Logistic Regression,adaptive_calibration,isotonic,coverage,0.7924764397905759,0.7818499127399651,0.8027923211169284,1000
+Pima,model_a_screening,Logistic Regression,naive_transfer,uncalibrated,roc_auc,0.7066844029850747,0.6550570895522388,0.7556276119402986,1000
+Pima,model_a_screening,Logistic Regression,naive_transfer,uncalibrated,brier_score,0.21742529585064205,0.19834574869551763,0.2379601590954104,1000
+Pima,model_a_screening,Logistic Regression,naive_transfer,uncalibrated,ece,0.13310220092448968,0.09872454762422846,0.17163342021352343,1000
+Pima,model_a_screening,Logistic Regression,naive_transfer,uncalibrated,coverage,0.5677942708333333,0.5182291666666666,0.6145833333333334,1000
+Pima,model_a_screening,Logistic Regression,fixed_recalibration,beta,roc_auc,0.7066844029850747,0.6550570895522388,0.7556276119402986,1000
+Pima,model_a_screening,Logistic Regression,fixed_recalibration,beta,brier_score,0.2060662790120058,0.19082732780291878,0.22221450968114165,1000
+Pima,model_a_screening,Logistic Regression,fixed_recalibration,beta,ece,0.1111173974867061,0.07356648223858654,0.15299689289331567,1000
+Pima,model_a_screening,Logistic Regression,fixed_recalibration,beta,coverage,0.565578125,0.5208333333333334,0.6067708333333334,1000
+Pima,model_a_screening,Logistic Regression,adaptive_calibration,isotonic,roc_auc,0.6988527164179105,0.6459194029850747,0.7456574626865672,1000
+Pima,model_a_screening,Logistic Regression,adaptive_calibration,isotonic,brier_score,0.20779088836827703,0.19118248809361565,0.22531115023745946,1000
+Pima,model_a_screening,Logistic Regression,adaptive_calibration,isotonic,ece,0.10298968861494885,0.06594964145530584,0.1436229093713795,1000
+Pima,model_a_screening,Logistic Regression,adaptive_calibration,isotonic,coverage,0.5630963541666666,0.5182291666666666,0.6068359375,1000
+NHANES,model_a_screening,Random Forest,naive_transfer,uncalibrated,roc_auc,0.7850299546903843,0.7535827503566035,0.8152760661394529,1000
+NHANES,model_a_screening,Random Forest,naive_transfer,uncalibrated,brier_score,0.25384496358856107,0.2410760941505314,0.2656308424771629,1000
+NHANES,model_a_screening,Random Forest,naive_transfer,uncalibrated,ece,0.33992187095879534,0.32630408097366526,0.35252819956716475,1000
+NHANES,model_a_screening,Random Forest,naive_transfer,uncalibrated,coverage,0.6507835951134381,0.6256326352530541,0.6788830715532286,1000
+NHANES,model_a_screening,Random Forest,fixed_recalibration,isotonic,roc_auc,0.7829931484938748,0.7513451947684175,0.8125258275297867,1000
+NHANES,model_a_screening,Random Forest,fixed_recalibration,isotonic,brier_score,0.12447304670286546,0.1196492154014648,0.1295694498327321,1000
+NHANES,model_a_screening,Random Forest,fixed_recalibration,isotonic,ece,0.02976651558664491,0.014528049862255171,0.04758245047510727,1000
+NHANES,model_a_screening,Random Forest,fixed_recalibration,isotonic,coverage,0.7641867364746945,0.7495636998254799,0.7774869109947644,1000
+NHANES,model_a_screening,Random Forest,adaptive_calibration,isotonic,roc_auc,0.7829931484938748,0.7513451947684175,0.8125258275297867,1000
+NHANES,model_a_screening,Random Forest,adaptive_calibration,isotonic,brier_score,0.12447304670286546,0.1196492154014648,0.1295694498327321,1000
+NHANES,model_a_screening,Random Forest,adaptive_calibration,isotonic,ece,0.02976651558664491,0.014528049862255171,0.04758245047510727,1000
+NHANES,model_a_screening,Random Forest,adaptive_calibration,isotonic,coverage,0.7641867364746945,0.7495636998254799,0.7774869109947644,1000
+Pima,model_a_screening,Random Forest,naive_transfer,uncalibrated,roc_auc,0.7223176567164179,0.6712828358208955,0.7703242537313433,1000
+Pima,model_a_screening,Random Forest,naive_transfer,uncalibrated,brier_score,0.20949683547480943,0.19061821485169886,0.2290783103442004,1000
+Pima,model_a_screening,Random Forest,naive_transfer,uncalibrated,ece,0.11869448136657561,0.08396588816693097,0.15497343475694425,1000
+Pima,model_a_screening,Random Forest,naive_transfer,uncalibrated,coverage,0.5599270833333333,0.5182291666666666,0.6016276041666666,1000
+Pima,model_a_screening,Random Forest,fixed_recalibration,isotonic,roc_auc,0.7097200746268657,0.6608888059701492,0.7551059701492537,1000
+Pima,model_a_screening,Random Forest,fixed_recalibration,isotonic,brier_score,0.20211802826717462,0.18652772624720942,0.21858641633284773,1000
+Pima,model_a_screening,Random Forest,fixed_recalibration,isotonic,ece,0.08000730384909718,0.04781894239504607,0.1154333972258341,1000
+Pima,model_a_screening,Random Forest,fixed_recalibration,isotonic,coverage,0.5836223958333333,0.5494791666666666,0.6197916666666666,1000
+Pima,model_a_screening,Random Forest,adaptive_calibration,isotonic,roc_auc,0.7097200746268657,0.6608888059701492,0.7551059701492537,1000
+Pima,model_a_screening,Random Forest,adaptive_calibration,isotonic,brier_score,0.20211802826717462,0.18652772624720942,0.21858641633284773,1000
+Pima,model_a_screening,Random Forest,adaptive_calibration,isotonic,ece,0.08000730384909718,0.04781894239504607,0.1154333972258341,1000
+Pima,model_a_screening,Random Forest,adaptive_calibration,isotonic,coverage,0.5836223958333333,0.5494791666666666,0.6197916666666666,1000
+NHANES,model_a_screening,XGBoost,naive_transfer,uncalibrated,roc_auc,0.7688931500671253,0.7354751609959725,0.7998106855177043,1000
+NHANES,model_a_screening,XGBoost,naive_transfer,uncalibrated,brier_score,0.1261215170994401,0.1201232610270381,0.1325091514736414,1000
+NHANES,model_a_screening,XGBoost,naive_transfer,uncalibrated,ece,0.029365459728150193,0.01742731455663125,0.04389038040049953,1000
+NHANES,model_a_screening,XGBoost,naive_transfer,uncalibrated,coverage,0.8034171029668412,0.7922993019197208,0.8150087260034904,1000
+NHANES,model_a_screening,XGBoost,fixed_recalibration,beta,roc_auc,0.7688931500671253,0.7354751609959725,0.7998106855177043,1000
+NHANES,model_a_screening,XGBoost,fixed_recalibration,beta,brier_score,0.12610879010964543,0.12163470316161264,0.13097138523017607,1000
+NHANES,model_a_screening,XGBoost,fixed_recalibration,beta,ece,0.02054989872441864,0.00795497681922236,0.03480400395181087,1000
+NHANES,model_a_screening,XGBoost,fixed_recalibration,beta,coverage,0.8123516579406632,0.8054101221640488,0.8184991273996509,1000
+NHANES,model_a_screening,XGBoost,adaptive_calibration,isotonic,roc_auc,0.76637948114197,0.7327016513886558,0.7973176733722102,1000
+NHANES,model_a_screening,XGBoost,adaptive_calibration,isotonic,brier_score,0.1257178386428663,0.1209082872677729,0.1308406046580179,1000
+NHANES,model_a_screening,XGBoost,adaptive_calibration,isotonic,ece,0.016158319174540272,0.005781220612297744,0.030070660127624813,1000
+NHANES,model_a_screening,XGBoost,adaptive_calibration,isotonic,coverage,0.8114825479930192,0.8045375218150087,0.8176265270506108,1000
+Pima,model_a_screening,XGBoost,naive_transfer,uncalibrated,roc_auc,0.696370223880597,0.645864552238806,0.7478063432835821,1000
+Pima,model_a_screening,XGBoost,naive_transfer,uncalibrated,brier_score,0.2916709555387497,0.2806160137057304,0.30201319679617883,1000
+Pima,model_a_screening,XGBoost,naive_transfer,uncalibrated,ece,0.2736630406198747,0.2606265592405483,0.2896322331466156,1000
+Pima,model_a_screening,XGBoost,naive_transfer,uncalibrated,coverage,0.6435338541666666,0.6328125,0.6510416666666666,1000
+Pima,model_a_screening,XGBoost,fixed_recalibration,beta,roc_auc,0.696370223880597,0.645864552238806,0.7478063432835821,1000
+Pima,model_a_screening,XGBoost,fixed_recalibration,beta,brier_score,0.20727557029053026,0.1931496170535737,0.22082002586705043,1000
+Pima,model_a_screening,XGBoost,fixed_recalibration,beta,ece,0.08742412556309544,0.05347750442875249,0.12365997557656985,1000
+Pima,model_a_screening,XGBoost,fixed_recalibration,beta,coverage,0.5416640625,0.5,0.5833333333333334,1000
+Pima,model_a_screening,XGBoost,adaptive_calibration,isotonic,roc_auc,0.6932340149253731,0.6429835820895523,0.7431861940298508,1000
+Pima,model_a_screening,XGBoost,adaptive_calibration,isotonic,brier_score,0.20546179275066281,0.19013444050948275,0.22061124226125328,1000
+Pima,model_a_screening,XGBoost,adaptive_calibration,isotonic,ece,0.07698572906705785,0.044225496699692224,0.11414909387671746,1000
+Pima,model_a_screening,XGBoost,adaptive_calibration,isotonic,coverage,0.5678125,0.53125,0.6041666666666666,1000
+NHANES,model_a_screening,LightGBM,naive_transfer,uncalibrated,roc_auc,0.7759069632069139,0.7421023478142306,0.8062161095611681,1000
+NHANES,model_a_screening,LightGBM,naive_transfer,uncalibrated,brier_score,0.2591051096100814,0.24463047948138603,0.27335289211587893,1000
+NHANES,model_a_screening,LightGBM,naive_transfer,uncalibrated,ece,0.3250514885916538,0.3095022645718894,0.3404143686739358,1000
+NHANES,model_a_screening,LightGBM,naive_transfer,uncalibrated,coverage,0.6235610820244328,0.5959860383944153,0.6518324607329843,1000
+NHANES,model_a_screening,LightGBM,fixed_recalibration,beta,roc_auc,0.7759069632069139,0.7421023478142306,0.8062161095611681,1000
+NHANES,model_a_screening,LightGBM,fixed_recalibration,beta,brier_score,0.12519039834584744,0.12063675160415888,0.130181054552027,1000
+NHANES,model_a_screening,LightGBM,fixed_recalibration,beta,ece,0.02377122514685042,0.011276785579716514,0.03856806923183901,1000
+NHANES,model_a_screening,LightGBM,fixed_recalibration,beta,coverage,0.8133176265270506,0.8071553228621291,0.8184991273996509,1000
+NHANES,model_a_screening,LightGBM,adaptive_calibration,isotonic,roc_auc,0.773503062594395,0.7401739359582143,0.8048229962032221,1000
+NHANES,model_a_screening,LightGBM,adaptive_calibration,isotonic,brier_score,0.1249468744625391,0.11993195548757912,0.13034780068527188,1000
+NHANES,model_a_screening,LightGBM,adaptive_calibration,isotonic,ece,0.01656349153940073,0.006304374491195969,0.03069294740442827,1000
+NHANES,model_a_screening,LightGBM,adaptive_calibration,isotonic,coverage,0.808064572425829,0.8010471204188482,0.8150087260034904,1000
+Pima,model_a_screening,LightGBM,naive_transfer,uncalibrated,roc_auc,0.6813748208955224,0.627269776119403,0.7362910447761195,1000
+Pima,model_a_screening,LightGBM,naive_transfer,uncalibrated,brier_score,0.22913738149722376,0.20480867899004354,0.2531811942456235,1000
+Pima,model_a_screening,LightGBM,naive_transfer,uncalibrated,ece,0.15150402484089995,0.11121371541892024,0.19202054891223624,1000
+Pima,model_a_screening,LightGBM,naive_transfer,uncalibrated,coverage,0.6046276041666666,0.5546875,0.6484375,1000
+Pima,model_a_screening,LightGBM,fixed_recalibration,beta,roc_auc,0.6813748208955224,0.627269776119403,0.7362910447761195,1000
+Pima,model_a_screening,LightGBM,fixed_recalibration,beta,brier_score,0.20919560161290576,0.19542106471848386,0.22306227165875553,1000
+Pima,model_a_screening,LightGBM,fixed_recalibration,beta,ece,0.07099680454767,0.037075789552912505,0.10912923513296094,1000
+Pima,model_a_screening,LightGBM,fixed_recalibration,beta,coverage,0.5599609375,0.5233723958333334,0.5989583333333334,1000
+Pima,model_a_screening,LightGBM,adaptive_calibration,isotonic,roc_auc,0.6797578507462687,0.6240059701492537,0.7334298507462687,1000
+Pima,model_a_screening,LightGBM,adaptive_calibration,isotonic,brier_score,0.2102736128343156,0.19512728066672377,0.22629042941755032,1000
+Pima,model_a_screening,LightGBM,adaptive_calibration,isotonic,ece,0.07444291252538696,0.04261787680418594,0.1138343023405601,1000
+Pima,model_a_screening,LightGBM,adaptive_calibration,isotonic,coverage,0.5366901041666666,0.5,0.5729817708333332,1000
+NHANES,model_a_screening,CatBoost,naive_transfer,uncalibrated,roc_auc,0.7742945282346031,0.7420673429895956,0.806281661667226,1000
+NHANES,model_a_screening,CatBoost,naive_transfer,uncalibrated,brier_score,0.12498634951859457,0.11913630823483624,0.1310003467813891,1000
+NHANES,model_a_screening,CatBoost,naive_transfer,uncalibrated,ece,0.026228803319776953,0.01475620006679717,0.04065628821774814,1000
+NHANES,model_a_screening,CatBoost,naive_transfer,uncalibrated,coverage,0.8095349040139616,0.7993019197207679,0.819371727748691,1000
+NHANES,model_a_screening,CatBoost,fixed_recalibration,beta,roc_auc,0.7742945282346031,0.7420673429895956,0.806281661667226,1000
+NHANES,model_a_screening,CatBoost,fixed_recalibration,beta,brier_score,0.12537237825295938,0.12094466607125491,0.12988656896170747,1000
+NHANES,model_a_screening,CatBoost,fixed_recalibration,beta,ece,0.023203001017727785,0.011138918032954291,0.03772586998293276,1000
+NHANES,model_a_screening,CatBoost,fixed_recalibration,beta,coverage,0.8176675392670156,0.8132417102966841,0.8211387434554974,1000
+NHANES,model_a_screening,CatBoost,adaptive_calibration,isotonic,roc_auc,0.7623423157199195,0.7308731409422722,0.7936752705990939,1000
+NHANES,model_a_screening,CatBoost,adaptive_calibration,isotonic,brier_score,0.12689950891581786,0.12177269270961016,0.1319602804899789,1000
+NHANES,model_a_screening,CatBoost,adaptive_calibration,isotonic,ece,0.018552132246762144,0.006553819462424119,0.03494467856955792,1000
+NHANES,model_a_screening,CatBoost,adaptive_calibration,isotonic,coverage,0.8070253054101222,0.7993019197207679,0.8141361256544503,1000
+Pima,model_a_screening,CatBoost,naive_transfer,uncalibrated,roc_auc,0.709103447761194,0.6547335820895521,0.7578619402985073,1000
+Pima,model_a_screening,CatBoost,naive_transfer,uncalibrated,brier_score,0.29273656657532626,0.28217318217450077,0.3022266137233074,1000
+Pima,model_a_screening,CatBoost,naive_transfer,uncalibrated,ece,0.2804004645752234,0.2688248020330225,0.2920048002459076,1000
+Pima,model_a_screening,CatBoost,naive_transfer,uncalibrated,coverage,0.6460677083333334,0.6380208333333334,0.6510416666666666,1000
+Pima,model_a_screening,CatBoost,fixed_recalibration,beta,roc_auc,0.709103447761194,0.6547335820895521,0.7578619402985073,1000
+Pima,model_a_screening,CatBoost,fixed_recalibration,beta,brier_score,0.20585669307432466,0.19242475251199045,0.22029966062357723,1000
+Pima,model_a_screening,CatBoost,fixed_recalibration,beta,ece,0.10636393766342764,0.07143145785166063,0.1436612668433058,1000
+Pima,model_a_screening,CatBoost,fixed_recalibration,beta,coverage,0.5622447916666667,0.5260416666666666,0.5990234375,1000
+Pima,model_a_screening,CatBoost,adaptive_calibration,isotonic,roc_auc,0.690024119402985,0.6387858208955224,0.7366444029850745,1000
+Pima,model_a_screening,CatBoost,adaptive_calibration,isotonic,brier_score,0.20522410922397097,0.19036824604713806,0.2212671477861906,1000
+Pima,model_a_screening,CatBoost,adaptive_calibration,isotonic,ece,0.07412008758857735,0.04198909630589701,0.1135016668183522,1000
+Pima,model_a_screening,CatBoost,adaptive_calibration,isotonic,coverage,0.5731067708333334,0.5390625,0.609375,1000
+NHANES,model_b_routine_clinical,Logistic Regression,naive_transfer,uncalibrated,roc_auc,0.9424205193824466,0.924278533520725,0.9597304235190468,1000
+NHANES,model_b_routine_clinical,Logistic Regression,naive_transfer,uncalibrated,brier_score,0.08219146250218837,0.07158705522665453,0.09263820735712756,1000
+NHANES,model_b_routine_clinical,Logistic Regression,naive_transfer,uncalibrated,ece,0.09419296529189757,0.08082341525173634,0.10687901651031863,1000
+NHANES,model_b_routine_clinical,Logistic Regression,naive_transfer,uncalibrated,coverage,0.9066256544502618,0.8909249563699826,0.9223385689354275,1000
+NHANES,model_b_routine_clinical,Logistic Regression,fixed_recalibration,uncalibrated,roc_auc,0.9424207029283437,0.9242531648556807,0.959730423519047,1000
+NHANES,model_b_routine_clinical,Logistic Regression,fixed_recalibration,uncalibrated,brier_score,0.08219146081040835,0.07158705522666682,0.09263819910139091,1000
+NHANES,model_b_routine_clinical,Logistic Regression,fixed_recalibration,uncalibrated,ece,0.0941929527042202,0.08082340250156682,0.10687900461359076,1000
+NHANES,model_b_routine_clinical,Logistic Regression,fixed_recalibration,uncalibrated,coverage,0.9066256544502618,0.8909249563699826,0.9223385689354275,1000
+NHANES,model_b_routine_clinical,Logistic Regression,adaptive_calibration,isotonic,roc_auc,0.938465632341836,0.9189337425532808,0.9568182712074174,1000
+NHANES,model_b_routine_clinical,Logistic Regression,adaptive_calibration,isotonic,brier_score,0.06709162358620632,0.058052952112370784,0.07612269118485547,1000
+NHANES,model_b_routine_clinical,Logistic Regression,adaptive_calibration,isotonic,ece,0.02536370996524763,0.014984071565121203,0.03740866606339152,1000
+NHANES,model_b_routine_clinical,Logistic Regression,adaptive_calibration,isotonic,coverage,0.9106701570680628,0.8952879581151832,0.924956369982548,1000
+Pima,model_b_routine_clinical,Logistic Regression,naive_transfer,uncalibrated,roc_auc,0.8058871940298508,0.7622649253731344,0.845694776119403,1000
+Pima,model_b_routine_clinical,Logistic Regression,naive_transfer,uncalibrated,brier_score,0.18132492192960506,0.15943843082084436,0.2031352465909391,1000
+Pima,model_b_routine_clinical,Logistic Regression,naive_transfer,uncalibrated,ece,0.10640658175230873,0.07772887866383808,0.13967703484118507,1000
+Pima,model_b_routine_clinical,Logistic Regression,naive_transfer,uncalibrated,coverage,0.7476015625,0.7083333333333334,0.7864583333333334,1000
+Pima,model_b_routine_clinical,Logistic Regression,fixed_recalibration,uncalibrated,roc_auc,0.8058871940298508,0.7622649253731344,0.845694776119403,1000
+Pima,model_b_routine_clinical,Logistic Regression,fixed_recalibration,uncalibrated,brier_score,0.18132492192960506,0.15943843082084436,0.2031352465909391,1000
+Pima,model_b_routine_clinical,Logistic Regression,fixed_recalibration,uncalibrated,ece,0.10640658175230873,0.07772887866383808,0.13967703484118507,1000
+Pima,model_b_routine_clinical,Logistic Regression,fixed_recalibration,uncalibrated,coverage,0.7476015625,0.7083333333333334,0.7864583333333334,1000
+Pima,model_b_routine_clinical,Logistic Regression,adaptive_calibration,isotonic,roc_auc,0.8015672985074628,0.757154104477612,0.8416705223880596,1000
+Pima,model_b_routine_clinical,Logistic Regression,adaptive_calibration,isotonic,brier_score,0.17225928596398454,0.15271940185119137,0.1930288074642742,1000
+Pima,model_b_routine_clinical,Logistic Regression,adaptive_calibration,isotonic,ece,0.05373061655724899,0.02570072015195836,0.08911329955441276,1000
+Pima,model_b_routine_clinical,Logistic Regression,adaptive_calibration,isotonic,coverage,0.7395911458333334,0.6953125,0.78125,1000
+NHANES,model_b_routine_clinical,Random Forest,naive_transfer,uncalibrated,roc_auc,0.9265932937573418,0.9066464591374392,0.9457598275717402,1000
+NHANES,model_b_routine_clinical,Random Forest,naive_transfer,uncalibrated,brier_score,0.08815642636397387,0.07627823981349209,0.09938476064516233,1000
+NHANES,model_b_routine_clinical,Random Forest,naive_transfer,uncalibrated,ece,0.07963164947813328,0.06641045943729924,0.09303462626869374,1000
+NHANES,model_b_routine_clinical,Random Forest,naive_transfer,uncalibrated,coverage,0.8698734729493892,0.8516579406631762,0.8883071553228621,1000
+NHANES,model_b_routine_clinical,Random Forest,fixed_recalibration,uncalibrated,roc_auc,0.9265932937573418,0.9066464591374392,0.9457598275717402,1000
+NHANES,model_b_routine_clinical,Random Forest,fixed_recalibration,uncalibrated,brier_score,0.08815642636397387,0.07627823981349209,0.09938476064516233,1000
+NHANES,model_b_routine_clinical,Random Forest,fixed_recalibration,uncalibrated,ece,0.07963164947813328,0.06641045943729924,0.09303462626869374,1000
+NHANES,model_b_routine_clinical,Random Forest,fixed_recalibration,uncalibrated,coverage,0.8698734729493892,0.8516579406631762,0.8883071553228621,1000
+NHANES,model_b_routine_clinical,Random Forest,adaptive_calibration,isotonic,roc_auc,0.9226412516781338,0.9011870175364994,0.9421031999916094,1000
+NHANES,model_b_routine_clinical,Random Forest,adaptive_calibration,isotonic,brier_score,0.07285238054757985,0.06383210485051172,0.08198901097424062,1000
+NHANES,model_b_routine_clinical,Random Forest,adaptive_calibration,isotonic,ece,0.022942430525303006,0.013141207845809667,0.034337332285694466,1000
+NHANES,model_b_routine_clinical,Random Forest,adaptive_calibration,isotonic,coverage,0.9047286212914485,0.8909031413612566,0.918848167539267,1000
+Pima,model_b_routine_clinical,Random Forest,naive_transfer,uncalibrated,roc_auc,0.7952566567164179,0.7485593283582088,0.8373455223880597,1000
+Pima,model_b_routine_clinical,Random Forest,naive_transfer,uncalibrated,brier_score,0.19527424496595291,0.1786538933977971,0.21197054124976125,1000
+Pima,model_b_routine_clinical,Random Forest,naive_transfer,uncalibrated,ece,0.13417608056285138,0.10949036837310465,0.16216685104803888,1000
+Pima,model_b_routine_clinical,Random Forest,naive_transfer,uncalibrated,coverage,0.6822890625,0.6509765625,0.7135416666666666,1000
+Pima,model_b_routine_clinical,Random Forest,fixed_recalibration,uncalibrated,roc_auc,0.7952566567164179,0.7485593283582088,0.8373455223880597,1000
+Pima,model_b_routine_clinical,Random Forest,fixed_recalibration,uncalibrated,brier_score,0.19527424496595291,0.1786538933977971,0.21197054124976125,1000
+Pima,model_b_routine_clinical,Random Forest,fixed_recalibration,uncalibrated,ece,0.13417608056285138,0.10949036837310465,0.16216685104803888,1000
+Pima,model_b_routine_clinical,Random Forest,fixed_recalibration,uncalibrated,coverage,0.6822890625,0.6509765625,0.7135416666666666,1000
+Pima,model_b_routine_clinical,Random Forest,adaptive_calibration,isotonic,roc_auc,0.7900803283582091,0.7415037313432836,0.8327869402985074,1000
+Pima,model_b_routine_clinical,Random Forest,adaptive_calibration,isotonic,brier_score,0.17932712683395755,0.16403692970889286,0.19535418964140125,1000
+Pima,model_b_routine_clinical,Random Forest,adaptive_calibration,isotonic,ece,0.08126691495276962,0.049011295868686994,0.11626561262477851,1000
+Pima,model_b_routine_clinical,Random Forest,adaptive_calibration,isotonic,coverage,0.7105885416666666,0.6692057291666667,0.7552083333333334,1000
+NHANES,model_b_routine_clinical,XGBoost,naive_transfer,uncalibrated,roc_auc,0.925647324425239,0.9021381785954018,0.9465479605428764,1000
+NHANES,model_b_routine_clinical,XGBoost,naive_transfer,uncalibrated,brier_score,0.08257941301167011,0.07002326734364032,0.09589355774223804,1000
+NHANES,model_b_routine_clinical,XGBoost,naive_transfer,uncalibrated,ece,0.08098478924033028,0.06793330585826222,0.09501011642507122,1000
+NHANES,model_b_routine_clinical,XGBoost,naive_transfer,uncalibrated,coverage,0.8906832460732985,0.8743455497382199,0.9066317626527051,1000
+NHANES,model_b_routine_clinical,XGBoost,fixed_recalibration,temperature,roc_auc,0.925647324425239,0.9021381785954018,0.9465479605428764,1000
+NHANES,model_b_routine_clinical,XGBoost,fixed_recalibration,temperature,brier_score,0.07080111588553922,0.060948826480060725,0.08128712359345192,1000
+NHANES,model_b_routine_clinical,XGBoost,fixed_recalibration,temperature,ece,0.025138096563465443,0.01373912688668037,0.03808110931158744,1000
+NHANES,model_b_routine_clinical,XGBoost,fixed_recalibration,temperature,coverage,0.8453184991273996,0.8280977312390925,0.8630017452006981,1000
+NHANES,model_b_routine_clinical,XGBoost,adaptive_calibration,isotonic,roc_auc,0.9226388472268836,0.8992765014054372,0.9435742548036582,1000
+NHANES,model_b_routine_clinical,XGBoost,adaptive_calibration,isotonic,brier_score,0.06927393649584396,0.059772274719852386,0.07942662400726537,1000
+NHANES,model_b_routine_clinical,XGBoost,adaptive_calibration,isotonic,ece,0.020933286105298057,0.009414272563265892,0.03396070320519303,1000
+NHANES,model_b_routine_clinical,XGBoost,adaptive_calibration,isotonic,coverage,0.71593630017452,0.6980802792321117,0.7347294938917975,1000
+Pima,model_b_routine_clinical,XGBoost,naive_transfer,uncalibrated,roc_auc,0.7627983134328358,0.7159089552238806,0.8103839552238806,1000
+Pima,model_b_routine_clinical,XGBoost,naive_transfer,uncalibrated,brier_score,0.306316330075264,0.29640376642346383,0.31542247608304025,1000
+Pima,model_b_routine_clinical,XGBoost,naive_transfer,uncalibrated,ece,0.31033100733153235,0.2999090474194838,0.3219895755571401,1000
+Pima,model_b_routine_clinical,XGBoost,naive_transfer,uncalibrated,coverage,0.6068802083333332,0.5859375,0.625,1000
+Pima,model_b_routine_clinical,XGBoost,fixed_recalibration,temperature,roc_auc,0.7627983134328358,0.7159089552238806,0.8103839552238806,1000
+Pima,model_b_routine_clinical,XGBoost,fixed_recalibration,temperature,brier_score,0.20004763335399653,0.1914301080363908,0.2081783770647516,1000
+Pima,model_b_routine_clinical,XGBoost,fixed_recalibration,temperature,ece,0.0931503127733838,0.071152244385104,0.12802446589364957,1000
+Pima,model_b_routine_clinical,XGBoost,fixed_recalibration,temperature,coverage,0.0,0.0,0.0,1000
+Pima,model_b_routine_clinical,XGBoost,adaptive_calibration,isotonic,roc_auc,0.7578592835820895,0.7111585820895522,0.8044444029850746,1000
+Pima,model_b_routine_clinical,XGBoost,adaptive_calibration,isotonic,brier_score,0.18702545455013678,0.16778730408723108,0.20560919007431575,1000
+Pima,model_b_routine_clinical,XGBoost,adaptive_calibration,isotonic,ece,0.06107680756035924,0.03236655127292894,0.09096689534329949,1000
+Pima,model_b_routine_clinical,XGBoost,adaptive_calibration,isotonic,coverage,0.22391927083333335,0.18743489583333334,0.2630208333333333,1000
+NHANES,model_b_routine_clinical,LightGBM,naive_transfer,uncalibrated,roc_auc,0.9227615397927504,0.8997807937573418,0.9436080141382782,1000
+NHANES,model_b_routine_clinical,LightGBM,naive_transfer,uncalibrated,brier_score,0.08414499337992991,0.07078585140678473,0.09694170560042802,1000
+NHANES,model_b_routine_clinical,LightGBM,naive_transfer,uncalibrated,ece,0.0767215366862975,0.06085703442815688,0.09260350661715465,1000
+NHANES,model_b_routine_clinical,LightGBM,naive_transfer,uncalibrated,coverage,0.877760907504363,0.8603839441535777,0.8961605584642234,1000
+NHANES,model_b_routine_clinical,LightGBM,fixed_recalibration,temperature,roc_auc,0.9227615397927504,0.8997807937573418,0.9436080141382782,1000
+NHANES,model_b_routine_clinical,LightGBM,fixed_recalibration,temperature,brier_score,0.07562168331465523,0.06528461538487086,0.08586478668460451,1000
+NHANES,model_b_routine_clinical,LightGBM,fixed_recalibration,temperature,ece,0.04650469157542291,0.03428354962109966,0.05892192717824243,1000
+NHANES,model_b_routine_clinical,LightGBM,fixed_recalibration,temperature,coverage,0.8524415357766143,0.8333333333333334,0.8717495636998255,1000
+NHANES,model_b_routine_clinical,LightGBM,adaptive_calibration,isotonic,roc_auc,0.9230375954438664,0.9002865282555799,0.9420698995217317,1000
+NHANES,model_b_routine_clinical,LightGBM,adaptive_calibration,isotonic,brier_score,0.07180135690737606,0.062252428464874845,0.08169333863652387,1000
+NHANES,model_b_routine_clinical,LightGBM,adaptive_calibration,isotonic,ece,0.022230210642729384,0.011749829225479272,0.03380907634013573,1000
+NHANES,model_b_routine_clinical,LightGBM,adaptive_calibration,isotonic,coverage,0.9065043630017452,0.8926483420593369,0.9197207678883071,1000
+Pima,model_b_routine_clinical,LightGBM,naive_transfer,uncalibrated,roc_auc,0.7835620000000001,0.7324417910447761,0.8290455223880598,1000
+Pima,model_b_routine_clinical,LightGBM,naive_transfer,uncalibrated,brier_score,0.23620022866193754,0.21489683846182148,0.25802755051030407,1000
+Pima,model_b_routine_clinical,LightGBM,naive_transfer,uncalibrated,ece,0.22142939647043058,0.1965324100992,0.24696310539264782,1000
+Pima,model_b_routine_clinical,LightGBM,naive_transfer,uncalibrated,coverage,0.6531223958333332,0.6249348958333334,0.6796875,1000
+Pima,model_b_routine_clinical,LightGBM,fixed_recalibration,temperature,roc_auc,0.7835620000000001,0.7324417910447761,0.8290455223880598,1000
+Pima,model_b_routine_clinical,LightGBM,fixed_recalibration,temperature,brier_score,0.18430612420613876,0.17406460032102122,0.19585102881455074,1000
+Pima,model_b_routine_clinical,LightGBM,fixed_recalibration,temperature,ece,0.08602110485688139,0.05197120694294979,0.1208200406214115,1000
+Pima,model_b_routine_clinical,LightGBM,fixed_recalibration,temperature,coverage,0.5595677083333332,0.5260416666666666,0.5911458333333334,1000
+Pima,model_b_routine_clinical,LightGBM,adaptive_calibration,isotonic,roc_auc,0.7745635970149254,0.7265764925373134,0.8171089552238805,1000
+Pima,model_b_routine_clinical,LightGBM,adaptive_calibration,isotonic,brier_score,0.18291541147770693,0.16817653625917486,0.19973854114874137,1000
+Pima,model_b_routine_clinical,LightGBM,adaptive_calibration,isotonic,ece,0.08240047682636989,0.046946953104130364,0.12116995673028817,1000
+Pima,model_b_routine_clinical,LightGBM,adaptive_calibration,isotonic,coverage,0.6924453125,0.6536458333333334,0.7291666666666666,1000
+NHANES,model_b_routine_clinical,CatBoost,naive_transfer,uncalibrated,roc_auc,0.91931198082732,0.895529215262628,0.9411453526178889,1000
+NHANES,model_b_routine_clinical,CatBoost,naive_transfer,uncalibrated,brier_score,0.07807923528547392,0.06638328053685713,0.0904710484771387,1000
+NHANES,model_b_routine_clinical,CatBoost,naive_transfer,uncalibrated,ece,0.06711010826973456,0.05327873942943754,0.0806130539077986,1000
+NHANES,model_b_routine_clinical,CatBoost,naive_transfer,uncalibrated,coverage,0.8434746945898778,0.824607329842932,0.8621509598603839,1000
+NHANES,model_b_routine_clinical,CatBoost,fixed_recalibration,isotonic,roc_auc,0.9184294318467863,0.8954858197684175,0.9396736422847793,1000
+NHANES,model_b_routine_clinical,CatBoost,fixed_recalibration,isotonic,brier_score,0.0726267607507554,0.06340421725755495,0.08224294754551364,1000
+NHANES,model_b_routine_clinical,CatBoost,fixed_recalibration,isotonic,ece,0.020799268305061496,0.011242067089717965,0.03180346046050653,1000
+NHANES,model_b_routine_clinical,CatBoost,fixed_recalibration,isotonic,coverage,0.7536422338568936,0.7329842931937173,0.774869109947644,1000
+NHANES,model_b_routine_clinical,CatBoost,adaptive_calibration,isotonic,roc_auc,0.9184294318467863,0.8954858197684175,0.9396736422847793,1000
+NHANES,model_b_routine_clinical,CatBoost,adaptive_calibration,isotonic,brier_score,0.0726267607507554,0.06340421725755495,0.08224294754551364,1000
+NHANES,model_b_routine_clinical,CatBoost,adaptive_calibration,isotonic,ece,0.020799268305061496,0.011242067089717965,0.03180346046050653,1000
+NHANES,model_b_routine_clinical,CatBoost,adaptive_calibration,isotonic,coverage,0.7536422338568936,0.7329842931937173,0.774869109947644,1000
+Pima,model_b_routine_clinical,CatBoost,naive_transfer,uncalibrated,roc_auc,0.7878984776119403,0.7432671641791045,0.8319171641791044,1000
+Pima,model_b_routine_clinical,CatBoost,naive_transfer,uncalibrated,brier_score,0.29764232834217774,0.28771164780468383,0.30692890805187784,1000
+Pima,model_b_routine_clinical,CatBoost,naive_transfer,uncalibrated,ece,0.3020507976935216,0.29362361569222584,0.31142567794089016,1000
+Pima,model_b_routine_clinical,CatBoost,naive_transfer,uncalibrated,coverage,0.6069296875,0.5859375,0.625,1000
+Pima,model_b_routine_clinical,CatBoost,fixed_recalibration,isotonic,roc_auc,0.7689165522388061,0.7214597014925374,0.8124182835820896,1000
+Pima,model_b_routine_clinical,CatBoost,fixed_recalibration,isotonic,brier_score,0.18327937016302814,0.1677812201687725,0.19955689741429714,1000
+Pima,model_b_routine_clinical,CatBoost,fixed_recalibration,isotonic,ece,0.047914876306190804,0.023667399657502107,0.07805354472150816,1000
+Pima,model_b_routine_clinical,CatBoost,fixed_recalibration,isotonic,coverage,0.2619765625,0.22135416666666666,0.3046875,1000
+Pima,model_b_routine_clinical,CatBoost,adaptive_calibration,isotonic,roc_auc,0.7689165522388061,0.7214597014925374,0.8124182835820896,1000
+Pima,model_b_routine_clinical,CatBoost,adaptive_calibration,isotonic,brier_score,0.18327937016302814,0.1677812201687725,0.19955689741429714,1000
+Pima,model_b_routine_clinical,CatBoost,adaptive_calibration,isotonic,ece,0.047914876306190804,0.023667399657502107,0.07805354472150816,1000
+Pima,model_b_routine_clinical,CatBoost,adaptive_calibration,isotonic,coverage,0.2619765625,0.22135416666666666,0.3046875,1000
+NHANES,model_c_extended_transport,Logistic Regression,naive_transfer,uncalibrated,roc_auc,0.9424205193824466,0.924278533520725,0.9597304235190468,1000
+NHANES,model_c_extended_transport,Logistic Regression,naive_transfer,uncalibrated,brier_score,0.08219146250218831,0.07158705522665448,0.09263820735712751,1000
+NHANES,model_c_extended_transport,Logistic Regression,naive_transfer,uncalibrated,ece,0.09419296529189743,0.08082341525173617,0.10687901651031845,1000
+NHANES,model_c_extended_transport,Logistic Regression,naive_transfer,uncalibrated,coverage,0.9066256544502618,0.8909249563699826,0.9223385689354275,1000
+NHANES,model_c_extended_transport,Logistic Regression,fixed_recalibration,uncalibrated,roc_auc,0.9424207029283437,0.9242531648556807,0.959730423519047,1000
+NHANES,model_c_extended_transport,Logistic Regression,fixed_recalibration,uncalibrated,brier_score,0.08219146081040828,0.07158705522666677,0.09263819910139087,1000
+NHANES,model_c_extended_transport,Logistic Regression,fixed_recalibration,uncalibrated,ece,0.09419295270422004,0.08082340250156665,0.10687900461359058,1000
+NHANES,model_c_extended_transport,Logistic Regression,fixed_recalibration,uncalibrated,coverage,0.9066256544502618,0.8909249563699826,0.9223385689354275,1000
+NHANES,model_c_extended_transport,Logistic Regression,adaptive_calibration,isotonic,roc_auc,0.938465632341836,0.9189337425532808,0.9568182712074174,1000
+NHANES,model_c_extended_transport,Logistic Regression,adaptive_calibration,isotonic,brier_score,0.06709162358620635,0.05805295211237078,0.0761226911848555,1000
+NHANES,model_c_extended_transport,Logistic Regression,adaptive_calibration,isotonic,ece,0.025363709965247658,0.01498407156512125,0.03740866606339159,1000
+NHANES,model_c_extended_transport,Logistic Regression,adaptive_calibration,isotonic,coverage,0.9106701570680628,0.8952879581151832,0.924956369982548,1000
+Pima,model_c_extended_transport,Logistic Regression,naive_transfer,uncalibrated,roc_auc,0.8058871940298508,0.7622649253731344,0.845694776119403,1000
+Pima,model_c_extended_transport,Logistic Regression,naive_transfer,uncalibrated,brier_score,0.18132492192960506,0.15943843082084438,0.20313524659093912,1000
+Pima,model_c_extended_transport,Logistic Regression,naive_transfer,uncalibrated,ece,0.10640658175230877,0.07772887866383811,0.1396770348411851,1000
+Pima,model_c_extended_transport,Logistic Regression,naive_transfer,uncalibrated,coverage,0.7476015625,0.7083333333333334,0.7864583333333334,1000
+Pima,model_c_extended_transport,Logistic Regression,fixed_recalibration,uncalibrated,roc_auc,0.8058871940298508,0.7622649253731344,0.845694776119403,1000
+Pima,model_c_extended_transport,Logistic Regression,fixed_recalibration,uncalibrated,brier_score,0.18132492192960506,0.15943843082084438,0.20313524659093912,1000
+Pima,model_c_extended_transport,Logistic Regression,fixed_recalibration,uncalibrated,ece,0.10640658175230877,0.07772887866383811,0.1396770348411851,1000
+Pima,model_c_extended_transport,Logistic Regression,fixed_recalibration,uncalibrated,coverage,0.7476015625,0.7083333333333334,0.7864583333333334,1000
+Pima,model_c_extended_transport,Logistic Regression,adaptive_calibration,isotonic,roc_auc,0.8015672985074628,0.757154104477612,0.8416705223880596,1000
+Pima,model_c_extended_transport,Logistic Regression,adaptive_calibration,isotonic,brier_score,0.17225928596398454,0.15271940185119137,0.1930288074642742,1000
+Pima,model_c_extended_transport,Logistic Regression,adaptive_calibration,isotonic,ece,0.05373061655724902,0.02570072015195845,0.08911329955441283,1000
+Pima,model_c_extended_transport,Logistic Regression,adaptive_calibration,isotonic,coverage,0.7395911458333334,0.6953125,0.78125,1000
+NHANES,model_c_extended_transport,Random Forest,naive_transfer,uncalibrated,roc_auc,0.9243471193782513,0.9041128702382949,0.9432223055462325,1000
+NHANES,model_c_extended_transport,Random Forest,naive_transfer,uncalibrated,brier_score,0.08785502963201927,0.07610749615492768,0.09914204373038518,1000
+NHANES,model_c_extended_transport,Random Forest,naive_transfer,uncalibrated,ece,0.07852214880277011,0.06579939484463627,0.09189539671265624,1000
+NHANES,model_c_extended_transport,Random Forest,naive_transfer,uncalibrated,coverage,0.8680523560209424,0.849912739965096,0.8856893542757417,1000
+NHANES,model_c_extended_transport,Random Forest,fixed_recalibration,uncalibrated,roc_auc,0.9243471193782513,0.9041128702382949,0.9432223055462325,1000
+NHANES,model_c_extended_transport,Random Forest,fixed_recalibration,uncalibrated,brier_score,0.08785502963201927,0.07610749615492768,0.09914204373038518,1000
+NHANES,model_c_extended_transport,Random Forest,fixed_recalibration,uncalibrated,ece,0.07852214880277011,0.06579939484463627,0.09189539671265624,1000
+NHANES,model_c_extended_transport,Random Forest,fixed_recalibration,uncalibrated,coverage,0.8680523560209424,0.849912739965096,0.8856893542757417,1000
+NHANES,model_c_extended_transport,Random Forest,adaptive_calibration,isotonic,roc_auc,0.923933907744588,0.904026210354086,0.9427321068971304,1000
+NHANES,model_c_extended_transport,Random Forest,adaptive_calibration,isotonic,brier_score,0.07340083880504172,0.06388511118483857,0.08274575227869838,1000
+NHANES,model_c_extended_transport,Random Forest,adaptive_calibration,isotonic,ece,0.022730057384204458,0.012561196736510474,0.033754229149168355,1000
+NHANES,model_c_extended_transport,Random Forest,adaptive_calibration,isotonic,coverage,0.9038001745200698,0.8900523560209425,0.9179755671902269,1000
+Pima,model_c_extended_transport,Random Forest,naive_transfer,uncalibrated,roc_auc,0.7974663880597016,0.7502641791044776,0.8381679104477612,1000
+Pima,model_c_extended_transport,Random Forest,naive_transfer,uncalibrated,brier_score,0.19361932799943676,0.17699621714468702,0.21063854380755756,1000
+Pima,model_c_extended_transport,Random Forest,naive_transfer,uncalibrated,ece,0.12967178075436117,0.10477973996934851,0.1552984905885376,1000
+Pima,model_c_extended_transport,Random Forest,naive_transfer,uncalibrated,coverage,0.6875598958333332,0.6536458333333334,0.71875,1000
+Pima,model_c_extended_transport,Random Forest,fixed_recalibration,uncalibrated,roc_auc,0.7974663880597016,0.7502641791044776,0.8381679104477612,1000
+Pima,model_c_extended_transport,Random Forest,fixed_recalibration,uncalibrated,brier_score,0.19361932799943676,0.17699621714468702,0.21063854380755756,1000
+Pima,model_c_extended_transport,Random Forest,fixed_recalibration,uncalibrated,ece,0.12967178075436117,0.10477973996934851,0.1552984905885376,1000
+Pima,model_c_extended_transport,Random Forest,fixed_recalibration,uncalibrated,coverage,0.6875598958333332,0.6536458333333334,0.71875,1000
+Pima,model_c_extended_transport,Random Forest,adaptive_calibration,isotonic,roc_auc,0.7861384179104477,0.7400298507462686,0.828060447761194,1000
+Pima,model_c_extended_transport,Random Forest,adaptive_calibration,isotonic,brier_score,0.17962583242988242,0.16468872421294908,0.19613985796787578,1000
+Pima,model_c_extended_transport,Random Forest,adaptive_calibration,isotonic,ece,0.053052043695061085,0.026586089656884446,0.08573615886025852,1000
+Pima,model_c_extended_transport,Random Forest,adaptive_calibration,isotonic,coverage,0.6967734375,0.6536458333333334,0.7395833333333334,1000
+NHANES,model_c_extended_transport,XGBoost,naive_transfer,uncalibrated,roc_auc,0.9244681993623092,0.9018195953599598,0.9447381979988252,1000
+NHANES,model_c_extended_transport,XGBoost,naive_transfer,uncalibrated,brier_score,0.08260660902410745,0.07017702125012874,0.09591812323778867,1000
+NHANES,model_c_extended_transport,XGBoost,naive_transfer,uncalibrated,ece,0.08352073501891735,0.07029941598983117,0.09690485280778571,1000
+NHANES,model_c_extended_transport,XGBoost,naive_transfer,uncalibrated,coverage,0.8906832460732985,0.8743455497382199,0.9066317626527051,1000
+NHANES,model_c_extended_transport,XGBoost,fixed_recalibration,temperature,roc_auc,0.9244681993623092,0.9018195953599598,0.9447381979988252,1000
+NHANES,model_c_extended_transport,XGBoost,fixed_recalibration,temperature,brier_score,0.07086759915222146,0.06100668493759382,0.08124626917995595,1000
+NHANES,model_c_extended_transport,XGBoost,fixed_recalibration,temperature,ece,0.023620769767802387,0.013432188980030303,0.03519107228189467,1000
+NHANES,model_c_extended_transport,XGBoost,fixed_recalibration,temperature,coverage,0.8495759162303664,0.8333333333333334,0.8664921465968587,1000
+NHANES,model_c_extended_transport,XGBoost,adaptive_calibration,isotonic,roc_auc,0.9219043935643565,0.8984978734896795,0.9423995610630977,1000
+NHANES,model_c_extended_transport,XGBoost,adaptive_calibration,isotonic,brier_score,0.06986999767707158,0.060299640446771795,0.08032949764172362,1000
+NHANES,model_c_extended_transport,XGBoost,adaptive_calibration,isotonic,ece,0.018420250465548956,0.008646876287710308,0.03060101594890956,1000
+NHANES,model_c_extended_transport,XGBoost,adaptive_calibration,isotonic,coverage,0.7519397905759163,0.7364528795811518,0.7678883071553229,1000
+Pima,model_c_extended_transport,XGBoost,naive_transfer,uncalibrated,roc_auc,0.7626042238805969,0.7148324626865671,0.8097249999999999,1000
+Pima,model_c_extended_transport,XGBoost,naive_transfer,uncalibrated,brier_score,0.3062070280313492,0.29585878252983094,0.3155136242508888,1000
+Pima,model_c_extended_transport,XGBoost,naive_transfer,uncalibrated,ece,0.3156116552785902,0.3060116232887974,0.3249055485447615,1000
+Pima,model_c_extended_transport,XGBoost,naive_transfer,uncalibrated,coverage,0.6095416666666666,0.5911458333333334,0.6276041666666666,1000
+Pima,model_c_extended_transport,XGBoost,fixed_recalibration,temperature,roc_auc,0.7626042238805969,0.7148324626865671,0.8097249999999999,1000
+Pima,model_c_extended_transport,XGBoost,fixed_recalibration,temperature,brier_score,0.19948617118853496,0.1908167054711078,0.2078157986205556,1000
+Pima,model_c_extended_transport,XGBoost,fixed_recalibration,temperature,ece,0.09845881088760336,0.07674493836499419,0.13192233302660328,1000
+Pima,model_c_extended_transport,XGBoost,fixed_recalibration,temperature,coverage,0.0,0.0,0.0,1000
+Pima,model_c_extended_transport,XGBoost,adaptive_calibration,isotonic,roc_auc,0.762455119402985,0.7144149253731343,0.8092294776119403,1000
+Pima,model_c_extended_transport,XGBoost,adaptive_calibration,isotonic,brier_score,0.18495772403443458,0.16644496992339353,0.20321477748208847,1000
+Pima,model_c_extended_transport,XGBoost,adaptive_calibration,isotonic,ece,0.08470709587212448,0.050163993635003165,0.12067807923509605,1000
+Pima,model_c_extended_transport,XGBoost,adaptive_calibration,isotonic,coverage,0.18453645833333332,0.1484375,0.22395833333333334,1000
+NHANES,model_c_extended_transport,LightGBM,naive_transfer,uncalibrated,roc_auc,0.9227615397927504,0.8997807937573418,0.9436080141382782,1000
+NHANES,model_c_extended_transport,LightGBM,naive_transfer,uncalibrated,brier_score,0.08414499337992991,0.07078585140678473,0.09694170560042802,1000
+NHANES,model_c_extended_transport,LightGBM,naive_transfer,uncalibrated,ece,0.0767215366862975,0.06085703442815688,0.09260350661715465,1000
+NHANES,model_c_extended_transport,LightGBM,naive_transfer,uncalibrated,coverage,0.877760907504363,0.8603839441535777,0.8961605584642234,1000
+NHANES,model_c_extended_transport,LightGBM,fixed_recalibration,temperature,roc_auc,0.9227615397927504,0.8997807937573418,0.9436080141382782,1000
+NHANES,model_c_extended_transport,LightGBM,fixed_recalibration,temperature,brier_score,0.07562168331465523,0.06528461538487086,0.08586478668460451,1000
+NHANES,model_c_extended_transport,LightGBM,fixed_recalibration,temperature,ece,0.04650469157542291,0.03428354962109966,0.05892192717824243,1000
+NHANES,model_c_extended_transport,LightGBM,fixed_recalibration,temperature,coverage,0.8524415357766143,0.8333333333333334,0.8717495636998255,1000
+NHANES,model_c_extended_transport,LightGBM,adaptive_calibration,isotonic,roc_auc,0.9230375954438664,0.9002865282555799,0.9420698995217317,1000
+NHANES,model_c_extended_transport,LightGBM,adaptive_calibration,isotonic,brier_score,0.07180135690737606,0.062252428464874845,0.08169333863652387,1000
+NHANES,model_c_extended_transport,LightGBM,adaptive_calibration,isotonic,ece,0.022230210642729384,0.011749829225479272,0.03380907634013573,1000
+NHANES,model_c_extended_transport,LightGBM,adaptive_calibration,isotonic,coverage,0.9065043630017452,0.8926483420593369,0.9197207678883071,1000
+Pima,model_c_extended_transport,LightGBM,naive_transfer,uncalibrated,roc_auc,0.7835620000000001,0.7324417910447761,0.8290455223880598,1000
+Pima,model_c_extended_transport,LightGBM,naive_transfer,uncalibrated,brier_score,0.23620022866193754,0.21489683846182148,0.25802755051030407,1000
+Pima,model_c_extended_transport,LightGBM,naive_transfer,uncalibrated,ece,0.22142939647043058,0.1965324100992,0.24696310539264782,1000
+Pima,model_c_extended_transport,LightGBM,naive_transfer,uncalibrated,coverage,0.6531223958333332,0.6249348958333334,0.6796875,1000
+Pima,model_c_extended_transport,LightGBM,fixed_recalibration,temperature,roc_auc,0.7835620000000001,0.7324417910447761,0.8290455223880598,1000
+Pima,model_c_extended_transport,LightGBM,fixed_recalibration,temperature,brier_score,0.18430612420613876,0.17406460032102122,0.19585102881455074,1000
+Pima,model_c_extended_transport,LightGBM,fixed_recalibration,temperature,ece,0.08602110485688139,0.05197120694294979,0.1208200406214115,1000
+Pima,model_c_extended_transport,LightGBM,fixed_recalibration,temperature,coverage,0.5595677083333332,0.5260416666666666,0.5911458333333334,1000
+Pima,model_c_extended_transport,LightGBM,adaptive_calibration,isotonic,roc_auc,0.7745635970149254,0.7265764925373134,0.8171089552238805,1000
+Pima,model_c_extended_transport,LightGBM,adaptive_calibration,isotonic,brier_score,0.18291541147770693,0.16817653625917486,0.19973854114874137,1000
+Pima,model_c_extended_transport,LightGBM,adaptive_calibration,isotonic,ece,0.08240047682636989,0.046946953104130364,0.12116995673028817,1000
+Pima,model_c_extended_transport,LightGBM,adaptive_calibration,isotonic,coverage,0.6924453125,0.6536458333333334,0.7291666666666666,1000
+NHANES,model_c_extended_transport,CatBoost,naive_transfer,uncalibrated,roc_auc,0.91931198082732,0.895529215262628,0.9411453526178889,1000
+NHANES,model_c_extended_transport,CatBoost,naive_transfer,uncalibrated,brier_score,0.07807923528547392,0.06638328053685713,0.0904710484771387,1000
+NHANES,model_c_extended_transport,CatBoost,naive_transfer,uncalibrated,ece,0.06711010826973456,0.05327873942943754,0.0806130539077986,1000
+NHANES,model_c_extended_transport,CatBoost,naive_transfer,uncalibrated,coverage,0.8434746945898778,0.824607329842932,0.8621509598603839,1000
+NHANES,model_c_extended_transport,CatBoost,fixed_recalibration,isotonic,roc_auc,0.9184294318467863,0.8954858197684175,0.9396736422847793,1000
+NHANES,model_c_extended_transport,CatBoost,fixed_recalibration,isotonic,brier_score,0.0726267607507554,0.06340421725755495,0.08224294754551364,1000
+NHANES,model_c_extended_transport,CatBoost,fixed_recalibration,isotonic,ece,0.020799268305061496,0.011242067089717965,0.03180346046050653,1000
+NHANES,model_c_extended_transport,CatBoost,fixed_recalibration,isotonic,coverage,0.7536422338568936,0.7329842931937173,0.774869109947644,1000
+NHANES,model_c_extended_transport,CatBoost,adaptive_calibration,isotonic,roc_auc,0.9184294318467863,0.8954858197684175,0.9396736422847793,1000
+NHANES,model_c_extended_transport,CatBoost,adaptive_calibration,isotonic,brier_score,0.0726267607507554,0.06340421725755495,0.08224294754551364,1000
+NHANES,model_c_extended_transport,CatBoost,adaptive_calibration,isotonic,ece,0.020799268305061496,0.011242067089717965,0.03180346046050653,1000
+NHANES,model_c_extended_transport,CatBoost,adaptive_calibration,isotonic,coverage,0.7536422338568936,0.7329842931937173,0.774869109947644,1000
+Pima,model_c_extended_transport,CatBoost,naive_transfer,uncalibrated,roc_auc,0.7878984776119403,0.7432671641791045,0.8319171641791044,1000
+Pima,model_c_extended_transport,CatBoost,naive_transfer,uncalibrated,brier_score,0.29764232834217774,0.28771164780468383,0.30692890805187784,1000
+Pima,model_c_extended_transport,CatBoost,naive_transfer,uncalibrated,ece,0.3020507976935216,0.29362361569222584,0.31142567794089016,1000
+Pima,model_c_extended_transport,CatBoost,naive_transfer,uncalibrated,coverage,0.6069296875,0.5859375,0.625,1000
+Pima,model_c_extended_transport,CatBoost,fixed_recalibration,isotonic,roc_auc,0.7689165522388061,0.7214597014925374,0.8124182835820896,1000
+Pima,model_c_extended_transport,CatBoost,fixed_recalibration,isotonic,brier_score,0.18327937016302814,0.1677812201687725,0.19955689741429714,1000
+Pima,model_c_extended_transport,CatBoost,fixed_recalibration,isotonic,ece,0.047914876306190804,0.023667399657502107,0.07805354472150816,1000
+Pima,model_c_extended_transport,CatBoost,fixed_recalibration,isotonic,coverage,0.2619765625,0.22135416666666666,0.3046875,1000
+Pima,model_c_extended_transport,CatBoost,adaptive_calibration,isotonic,roc_auc,0.7689165522388061,0.7214597014925374,0.8124182835820896,1000
+Pima,model_c_extended_transport,CatBoost,adaptive_calibration,isotonic,brier_score,0.18327937016302814,0.1677812201687725,0.19955689741429714,1000
+Pima,model_c_extended_transport,CatBoost,adaptive_calibration,isotonic,ece,0.047914876306190804,0.023667399657502107,0.07805354472150816,1000
+Pima,model_c_extended_transport,CatBoost,adaptive_calibration,isotonic,coverage,0.2619765625,0.22135416666666666,0.3046875,1000

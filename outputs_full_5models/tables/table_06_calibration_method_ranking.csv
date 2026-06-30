@@ -1,0 +1,76 @@
+feature_set,model,calibration_method,mean_ece,mean_brier,rank_score
+model_a_screening,CatBoost,beta,0.09645872707241676,0.16111282017683703,3.0
+model_a_screening,CatBoost,isotonic,0.09648017213241822,0.16100922364261924,3.0
+model_a_screening,CatBoost,platt,0.09734918865401161,0.1614215621691002,7.0
+model_a_screening,CatBoost,temperature,0.09772817800921339,0.16116061095044873,7.0
+model_a_screening,CatBoost,uncalibrated,0.09976305486733285,0.16163951817585334,10.0
+model_a_screening,LightGBM,beta,0.0970969165927592,0.16038043894120557,3.0
+model_a_screening,LightGBM,platt,0.09779290711054646,0.1601332471659899,4.0
+model_a_screening,LightGBM,isotonic,0.09762250049486255,0.16040119217146193,5.0
+model_a_screening,LightGBM,temperature,0.22064663302194756,0.20838906075445104,8.0
+model_a_screening,LightGBM,uncalibrated,0.23176551566211387,0.21739143579161777,10.0
+model_a_screening,Logistic Regression,beta,0.08877331001924961,0.15543549278733282,3.0
+model_a_screening,Logistic Regression,isotonic,0.08918920338735532,0.15537511594478418,3.0
+model_a_screening,Logistic Regression,platt,0.09306986635338343,0.15635407847627505,6.0
+model_a_screening,Logistic Regression,temperature,0.2527793875477326,0.22034259983247254,9.0
+model_a_screening,Logistic Regression,uncalibrated,0.24835095235336402,0.2251746356713975,9.0
+model_a_screening,Random Forest,isotonic,0.09934891339248764,0.16110568650209198,2.0
+model_a_screening,Random Forest,beta,0.09955790808970506,0.1611949963910655,4.0
+model_a_screening,Random Forest,platt,0.09957876586923727,0.16121020073718575,6.0
+model_a_screening,Random Forest,uncalibrated,0.22445127116655364,0.2081637744109318,8.0
+model_a_screening,Random Forest,temperature,0.2261972663888061,0.20860677795597246,10.0
+model_a_screening,XGBoost,beta,0.09597908227451657,0.16041922810504386,3.0
+model_a_screening,XGBoost,temperature,0.09679026726855111,0.16022152065667217,3.0
+model_a_screening,XGBoost,isotonic,0.09696109896012195,0.16066046277717574,7.0
+model_a_screening,XGBoost,platt,0.09728197449299104,0.1605975760828933,7.0
+model_a_screening,XGBoost,uncalibrated,0.09880248785279022,0.16094594842090418,10.0
+model_b_routine_clinical,CatBoost,isotonic,0.11955023377192357,0.1318701165860386,2.0
+model_b_routine_clinical,CatBoost,temperature,0.12077818467810575,0.13201415823667975,4.0
+model_b_routine_clinical,CatBoost,beta,0.12111008558934826,0.13247034141067732,7.0
+model_b_routine_clinical,CatBoost,platt,0.12111354277413815,0.13244306478059667,7.0
+model_b_routine_clinical,CatBoost,uncalibrated,0.12293614896881966,0.13306253044849378,10.0
+model_b_routine_clinical,LightGBM,temperature,0.11642615961536262,0.12236993245324519,2.0
+model_b_routine_clinical,LightGBM,uncalibrated,0.11884882427541915,0.12434797081673261,4.0
+model_b_routine_clinical,LightGBM,isotonic,0.12292130657878986,0.13294274739905668,7.0
+model_b_routine_clinical,LightGBM,platt,0.12302148132024719,0.13264399281608855,8.0
+model_b_routine_clinical,LightGBM,beta,0.12301422899224009,0.1329876971166372,9.0
+model_b_routine_clinical,Logistic Regression,temperature,0.10557665883875661,0.1125509911355972,3.0
+model_b_routine_clinical,Logistic Regression,uncalibrated,0.10509258710661458,0.11270706551754321,3.0
+model_b_routine_clinical,Logistic Regression,platt,0.11277597549993913,0.12681047895360983,6.0
+model_b_routine_clinical,Logistic Regression,beta,0.11314668108776059,0.12734631985144784,8.0
+model_b_routine_clinical,Logistic Regression,isotonic,0.11364932686631458,0.12796164534802904,10.0
+model_b_routine_clinical,Random Forest,uncalibrated,0.11236736085166071,0.11715799197842074,2.0
+model_b_routine_clinical,Random Forest,temperature,0.12039005414581853,0.12805687308342698,4.0
+model_b_routine_clinical,Random Forest,isotonic,0.1235010451436827,0.13516635526785117,6.0
+model_b_routine_clinical,Random Forest,beta,0.1271898695801731,0.13764457664186389,9.0
+model_b_routine_clinical,Random Forest,platt,0.12724064767881865,0.13628737158901819,9.0
+model_b_routine_clinical,XGBoost,temperature,0.1284052409368681,0.1347305213682197,2.0
+model_b_routine_clinical,XGBoost,isotonic,0.12909789856002085,0.13550137569870832,4.0
+model_b_routine_clinical,XGBoost,platt,0.12928276489591253,0.13556575950164704,6.0
+model_b_routine_clinical,XGBoost,beta,0.12934269920748764,0.13570123451299906,8.0
+model_b_routine_clinical,XGBoost,uncalibrated,0.1299345633769822,0.13585059837932115,10.0
+model_c_extended_transport,CatBoost,isotonic,0.11955023377192357,0.1318701165860386,2.0
+model_c_extended_transport,CatBoost,temperature,0.12077818467810575,0.13201415823667975,4.0
+model_c_extended_transport,CatBoost,beta,0.12111008558934826,0.13247034141067732,7.0
+model_c_extended_transport,CatBoost,platt,0.12111354277413815,0.13244306478059667,7.0
+model_c_extended_transport,CatBoost,uncalibrated,0.12293614896881966,0.13306253044849378,10.0
+model_c_extended_transport,LightGBM,temperature,0.11642615961536262,0.12236993245324519,2.0
+model_c_extended_transport,LightGBM,uncalibrated,0.11884882427541915,0.12434797081673261,4.0
+model_c_extended_transport,LightGBM,isotonic,0.12292130657878986,0.13294274739905668,7.0
+model_c_extended_transport,LightGBM,platt,0.12302148132024719,0.13264399281608855,8.0
+model_c_extended_transport,LightGBM,beta,0.12301422899224009,0.1329876971166372,9.0
+model_c_extended_transport,Logistic Regression,temperature,0.10557665883875413,0.11255099113558624,3.0
+model_c_extended_transport,Logistic Regression,uncalibrated,0.10509258710661455,0.11270706551754317,3.0
+model_c_extended_transport,Logistic Regression,platt,0.11277597549993913,0.12681047895360983,6.0
+model_c_extended_transport,Logistic Regression,beta,0.11314668108776062,0.12734631985144784,8.0
+model_c_extended_transport,Logistic Regression,isotonic,0.11364932686631467,0.12796164534802904,10.0
+model_c_extended_transport,Random Forest,uncalibrated,0.1107623937026963,0.11640103199339151,2.0
+model_c_extended_transport,Random Forest,temperature,0.1185240431309344,0.126791423068601,4.0
+model_c_extended_transport,Random Forest,isotonic,0.12362471127721501,0.13432901472447634,6.0
+model_c_extended_transport,Random Forest,platt,0.12571893732453213,0.13519636069378088,8.0
+model_c_extended_transport,Random Forest,beta,0.12627892216657843,0.13656104169955754,10.0
+model_c_extended_transport,XGBoost,temperature,0.12942884855873166,0.13471266490533942,4.0
+model_c_extended_transport,XGBoost,beta,0.12913574028122235,0.13564426820921552,5.0
+model_c_extended_transport,XGBoost,platt,0.1292301205825739,0.13552703179899156,5.0
+model_c_extended_transport,XGBoost,isotonic,0.12956681679694634,0.13545989154773994,6.0
+model_c_extended_transport,XGBoost,uncalibrated,0.1306520086780928,0.13587138379776062,10.0

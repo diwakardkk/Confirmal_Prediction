@@ -1,0 +1,15 @@
+harmonized_feature,Kaggle_available,Kaggle_missing_percent,NHANES_available,NHANES_missing_percent,Pima_available,Pima_missing_percent
+age,True,0.0,True,0.0,True,0.0
+sex,True,0.0,True,0.0,True,0.0
+bmi,True,0.0,True,0.0,True,1.4322916666666665
+hypertension,True,0.0,True,4.364906154517678,True,4.557291666666666
+heart_disease,True,0.0,False,100.0,False,100.0
+smoking_history,True,0.0,True,0.0,True,0.0
+glucose,True,0.0,True,0.0,True,0.6510416666666667
+hba1c,True,0.0,True,0.0,False,100.0
+blood_pressure,False,100.0,True,4.364906154517678,True,4.557291666666666
+insulin,False,100.0,False,100.0,True,48.69791666666667
+pregnancies,False,100.0,False,100.0,True,0.0
+diabetes_pedigree,False,100.0,False,100.0,True,0.0
+race,True,0.0,True,0.0,True,0.0
+socioeconomic_status,True,0.0,True,0.0,True,0.0
