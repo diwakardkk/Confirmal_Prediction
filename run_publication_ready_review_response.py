@@ -1169,17 +1169,49 @@ def plot_shift_aware(conformal: pd.DataFrame, paths: dict[str, Path], dpi: int) 
         "target_only_conformal": "Target-only",
     }
     summary["method_label"] = summary["conformal_method"].map(labels).fillna(summary["conformal_method"])
-    fig, axes = plt.subplots(1, 2, figsize=(18, 7), sharey=True)
+    method_order = [
+        "Source split",
+        "Importance-weighted source",
+        "ATCP",
+        "Weighted ATCP",
+        "SHIFT-ATCP",
+        "Safety-gated SHIFT",
+        "Target-only",
+        "DP-SHIFT",
+        "Risk-asymmetric SHIFT",
+    ]
+    summary = summary.loc[summary["method_label"].isin(method_order)].copy()
+    summary["method_label"] = pd.Categorical(summary["method_label"], categories=method_order, ordered=True)
+    summary["coverage_gap_pp"] = 100 * (summary["coverage"] - PRIMARY_CONFIDENCE)
+    fig, axes = plt.subplots(1, 2, figsize=(18, 9), sharey=True)
     for ax, target in zip(axes, ["NHANES", "Pima"]):
-        sub = summary.loc[summary["target_dataset"].eq(target)].sort_values("coverage")
-        sns.barplot(data=sub, y="method_label", x="coverage", ax=ax, color="#4C78A8")
-        ax.axvline(PRIMARY_CONFIDENCE, color="black", linestyle="--", linewidth=2)
-        ax.set_xlim(0, 1.0)
-        ax.set_title(target)
-        ax.set_xlabel("Mean marginal coverage")
+        sub = summary.loc[summary["target_dataset"].eq(target)].sort_values("method_label")
+        y_pos = np.arange(len(sub))
+        bar_colors = np.where(sub["coverage_gap_pp"] >= 0, "#4C9F70", "#D95F59")
+        ax.axvspan(-16, 0, color="#FBE3E3", alpha=0.35, zorder=0)
+        ax.axvspan(0, 2.5, color="#E4F2E6", alpha=0.30, zorder=0)
+        ax.barh(y_pos, sub["coverage_gap_pp"], color=bar_colors, edgecolor="white", linewidth=1.5, zorder=2)
+        ax.axvline(0, color="black", linestyle="--", linewidth=2)
+        ax.set_xlim(-16, 2.5)
+        ax.set_yticks(y_pos)
+        ax.set_yticklabels(sub["method_label"].astype(str), fontsize=14)
+        ax.invert_yaxis()
+        ax.set_title(f"{target}", fontsize=20, weight="bold", pad=12)
+        ax.set_xlabel("Coverage gap from 90% target (percentage points)")
         ax.set_ylabel("")
-        ax.tick_params(axis="both", labelsize=13)
-    fig.tight_layout()
+        ax.tick_params(axis="x", labelsize=13)
+        ax.grid(axis="x", alpha=0.25)
+        ax.grid(axis="y", visible=False)
+        for y, gap, cov in zip(y_pos, sub["coverage_gap_pp"], sub["coverage"]):
+            if gap >= 0:
+                ax.text(gap + 0.25, y, f"{gap:+.1f} pp ({cov:.3f})", va="center", ha="left", fontsize=11, weight="bold")
+            else:
+                ax.text(gap - 0.25, y, f"{gap:+.1f} pp ({cov:.3f})", va="center", ha="right", fontsize=11, weight="bold")
+        for spine in ["top", "right"]:
+            ax.spines[spine].set_visible(False)
+    fig.suptitle("Coverage Gap of Shift-Aware Conformal Baselines", fontsize=23, weight="bold", y=0.995)
+    fig.text(0.5, 0.945, "Bars left of zero under-cover; bars at or right of zero meet the 90% marginal coverage target.", ha="center", fontsize=13, weight="bold")
+    fig.tight_layout(rect=(0, 0, 1, 0.93), w_pad=3.0)
     fig.savefig(paths["figures"] / "figure_shift_aware_conformal_baselines.png", dpi=dpi)
     plt.close(fig)
 
