@@ -1348,28 +1348,32 @@ def plot_source_trust_stress(source_trust_stress: pd.DataFrame, paths: dict[str,
         set_size=("average_prediction_set_size", "mean"),
     )
     sns.set_theme(style="whitegrid", context="talk")
-    fig, axes = plt.subplots(1, 2, figsize=(18, 8), sharey=True)
-    legend_lines = []
-    legend_labels = []
-    for ax, target in zip(axes, ["NHANES", "Pima"]):
+    fig, axes = plt.subplots(2, 2, figsize=(18, 11), sharex=True)
+    max_source_weight = max(0.052, float(summary["source_weight"].max()) * 1.15)
+    for col, target in enumerate(["NHANES", "Pima"]):
         sub = summary.loc[summary["target_dataset"].eq(target)].sort_values("target_mix_fraction")
-        line1 = ax.plot(
+        ax_weight = axes[0, col]
+        ax_cov = axes[1, col]
+
+        ax_weight.plot(
             sub["target_mix_fraction"],
             sub["source_weight"],
             marker="o",
             markersize=9,
             linewidth=3.0,
             color="#4C78A8",
-            label="Source trust weight",
         )
-        ax.set_title(target, fontsize=20, weight="bold")
-        ax.set_xlabel("Target fraction in simulated target mixture")
-        ax.set_ylabel("Source trust weight")
-        ax.set_ylim(0, max(0.052, float(summary["source_weight"].max()) * 1.15))
-        ax.tick_params(axis="both", labelsize=13)
-        ax.grid(axis="y", alpha=0.25)
-        ax2 = ax.twinx()
-        line2 = ax2.plot(
+        ax_weight.fill_between(sub["target_mix_fraction"], sub["source_weight"], color="#4C78A8", alpha=0.16)
+        ax_weight.set_title(target, fontsize=20, weight="bold")
+        ax_weight.set_ylabel("Source trust\nweight")
+        ax_weight.set_ylim(0, max_source_weight)
+        ax_weight.tick_params(axis="both", labelsize=13)
+        ax_weight.grid(axis="y", alpha=0.25)
+        ax_weight.grid(axis="x", alpha=0.15)
+        for x, y in zip(sub["target_mix_fraction"], sub["source_weight"]):
+            ax_weight.text(x, y + max_source_weight * 0.04, f"{y:.3f}", ha="center", va="bottom", fontsize=10)
+
+        ax_cov.plot(
             sub["target_mix_fraction"],
             sub["coverage"],
             marker="s",
@@ -1378,7 +1382,7 @@ def plot_source_trust_stress(source_trust_stress: pd.DataFrame, paths: dict[str,
             color="#F58518",
             label="Marginal coverage",
         )
-        line3 = ax2.plot(
+        ax_cov.plot(
             sub["target_mix_fraction"],
             sub["diabetes_coverage"],
             marker="^",
@@ -1387,16 +1391,22 @@ def plot_source_trust_stress(source_trust_stress: pd.DataFrame, paths: dict[str,
             color="#54A24B",
             label="Diabetes coverage",
         )
-        line4 = ax2.axhline(PRIMARY_CONFIDENCE, color="black", linestyle="--", linewidth=2.2, label="90% target")
-        ax2.set_ylabel("Coverage")
-        ax2.set_ylim(0, 1.0)
-        ax2.tick_params(axis="y", labelsize=13)
-        if not legend_lines:
-            legend_lines = line1 + line2 + line3 + [line4]
-            legend_labels = [line.get_label() for line in legend_lines]
+        ax_cov.axhline(PRIMARY_CONFIDENCE, color="black", linestyle="--", linewidth=2.2, label="90% target")
+        ax_cov.set_xlabel("Target fraction in simulated target mixture")
+        ax_cov.set_ylabel("Coverage")
+        ax_cov.set_ylim(0, 1.0)
+        ax_cov.set_xticks([0, 0.25, 0.50, 0.75, 1.00])
+        ax_cov.tick_params(axis="both", labelsize=13)
+        ax_cov.grid(axis="y", alpha=0.25)
+        ax_cov.grid(axis="x", alpha=0.15)
+        if col == 1:
+            ax_cov.legend(loc="lower right", frameon=True, fontsize=11)
+        for spine in ["top", "right"]:
+            ax_weight.spines[spine].set_visible(False)
+            ax_cov.spines[spine].set_visible(False)
     fig.suptitle("Source-Trust Stress Test Under Simulated Source-Target Mixture Shift", fontsize=22, weight="bold", y=0.995)
-    fig.legend(legend_lines, legend_labels, loc="upper center", ncol=4, frameon=True, bbox_to_anchor=(0.5, 0.94), fontsize=12)
-    fig.tight_layout(rect=(0, 0, 1, 0.88))
+    fig.text(0.5, 0.945, "Top row: source-trust weight. Bottom row: coverage metrics with the dashed 90% target.", ha="center", fontsize=13, weight="bold")
+    fig.tight_layout(rect=(0, 0, 1, 0.92), h_pad=2.2, w_pad=2.5)
     fig.savefig(paths["figures"] / "figure_source_trust_stress_test.png", dpi=dpi)
     plt.close(fig)
 
