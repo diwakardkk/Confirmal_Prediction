@@ -1235,18 +1235,68 @@ def plot_shift_atcp_frontier(conformal: pd.DataFrame, paths: dict[str, Path], dp
     primary = summary.loc[summary["confidence_level"].eq(PRIMARY_CONFIDENCE)].copy()
     if primary.empty:
         return
-    fig, axes = plt.subplots(1, 2, figsize=(18, 7), sharey=False)
-    for ax, target in zip(axes, ["NHANES", "Pima"]):
-        sub = primary.loc[primary["target_dataset"].eq(target)].sort_values("clinical_cost")
-        sns.scatterplot(data=sub, x="referral_rate", y="clinical_cost", hue="method_label", s=150, ax=ax)
-        for _, row in sub.iterrows():
-            ax.text(row["referral_rate"], row["clinical_cost"], row["method_label"], fontsize=8, ha="left", va="bottom")
-        ax.set_title(target)
-        ax.set_xlabel("Referral rate at 90% confidence")
-        ax.set_ylabel("Clinical utility cost")
-        ax.tick_params(axis="both", labelsize=13)
-        ax.legend([], [], frameon=False)
-    fig.tight_layout()
+
+    plot_order = [
+        "ATCP",
+        "Target-only",
+        "Weighted ATCP",
+        "SHIFT-ATCP",
+        "Safety-gated SHIFT",
+        "DP-SHIFT",
+        "Risk-asymmetric SHIFT",
+        "Multi-objective DP-SHIFT",
+    ]
+    compact_labels = {
+        "ATCP": "Old ATCP",
+        "Target-only": "Target-only",
+        "Weighted ATCP": "Weighted ATCP",
+        "SHIFT-ATCP": "SHIFT-ATCP",
+        "Safety-gated SHIFT": "Safety-gated SHIFT",
+        "DP-SHIFT": "DP-SHIFT",
+        "Risk-asymmetric SHIFT": "Risk-asymmetric",
+        "Multi-objective DP-SHIFT": "Multi-objective DP",
+    }
+    primary = primary.loc[primary["method_label"].isin(plot_order)].copy()
+    primary["method_display"] = primary["method_label"].map(compact_labels)
+    primary["method_display"] = pd.Categorical(
+        primary["method_display"],
+        categories=[compact_labels[m] for m in plot_order if m in set(primary["method_label"])],
+        ordered=True,
+    )
+
+    palette = sns.color_palette("Set2", n_colors=len(plot_order))
+    fig, axes = plt.subplots(2, 2, figsize=(18, 12), sharey=True)
+    metric_specs = [
+        ("referral_rate", "Referral rate", 0),
+        ("clinical_cost", "Clinical cost", 1),
+    ]
+    for col, target in enumerate(["NHANES", "Pima"]):
+        target_data = primary.loc[primary["target_dataset"].eq(target)].sort_values("method_display")
+        for metric, xlabel, row in metric_specs:
+            ax = axes[row, col]
+            sns.barplot(
+                data=target_data,
+                y="method_display",
+                x=metric,
+                order=target_data["method_display"].cat.categories,
+                palette=palette,
+                ax=ax,
+                orient="h",
+                errorbar=None,
+            )
+            xmax = max(float(target_data[metric].max()) * 1.18, 0.05)
+            ax.set_xlim(0, xmax)
+            ax.set_title(f"{target}: {xlabel}", fontsize=18, weight="bold")
+            ax.set_xlabel(xlabel, fontsize=15)
+            ax.set_ylabel("")
+            ax.tick_params(axis="x", labelsize=13)
+            ax.tick_params(axis="y", labelsize=13)
+            for patch in ax.patches:
+                width = patch.get_width()
+                y = patch.get_y() + patch.get_height() / 2
+                ax.text(width + xmax * 0.015, y, f"{width:.3f}", va="center", ha="left", fontsize=11)
+    fig.suptitle("Clinical Referral and Cost Profile of SHIFT-ATCP Variants", fontsize=22, weight="bold", y=0.995)
+    fig.tight_layout(rect=(0, 0, 1, 0.97))
     fig.savefig(paths["figures"] / "figure_shift_atcp_clinical_referral_cost.png", dpi=dpi)
     plt.close(fig)
 
