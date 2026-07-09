@@ -1182,36 +1182,41 @@ def plot_shift_aware(conformal: pd.DataFrame, paths: dict[str, Path], dpi: int) 
     ]
     summary = summary.loc[summary["method_label"].isin(method_order)].copy()
     summary["method_label"] = pd.Categorical(summary["method_label"], categories=method_order, ordered=True)
-    summary["coverage_gap_pp"] = 100 * (summary["coverage"] - PRIMARY_CONFIDENCE)
-    fig, axes = plt.subplots(1, 2, figsize=(18, 9), sharey=True)
-    for ax, target in zip(axes, ["NHANES", "Pima"]):
-        sub = summary.loc[summary["target_dataset"].eq(target)].sort_values("method_label")
-        y_pos = np.arange(len(sub))
-        bar_colors = np.where(sub["coverage_gap_pp"] >= 0, "#4C9F70", "#D95F59")
-        ax.axvspan(-16, 0, color="#FBE3E3", alpha=0.35, zorder=0)
-        ax.axvspan(0, 2.5, color="#E4F2E6", alpha=0.30, zorder=0)
-        ax.barh(y_pos, sub["coverage_gap_pp"], color=bar_colors, edgecolor="white", linewidth=1.5, zorder=2)
-        ax.axvline(0, color="black", linestyle="--", linewidth=2)
-        ax.set_xlim(-16, 2.5)
-        ax.set_yticks(y_pos)
-        ax.set_yticklabels(sub["method_label"].astype(str), fontsize=14)
-        ax.invert_yaxis()
-        ax.set_title(f"{target}", fontsize=20, weight="bold", pad=12)
-        ax.set_xlabel("Coverage gap from 90% target (percentage points)")
-        ax.set_ylabel("")
-        ax.tick_params(axis="x", labelsize=13)
-        ax.grid(axis="x", alpha=0.25)
-        ax.grid(axis="y", visible=False)
-        for y, gap, cov in zip(y_pos, sub["coverage_gap_pp"], sub["coverage"]):
-            if gap >= 0:
-                ax.text(gap + 0.25, y, f"{gap:+.1f} pp ({cov:.3f})", va="center", ha="left", fontsize=11, weight="bold")
-            else:
-                ax.text(gap - 0.25, y, f"{gap:+.1f} pp ({cov:.3f})", va="center", ha="right", fontsize=11, weight="bold")
-        for spine in ["top", "right"]:
-            ax.spines[spine].set_visible(False)
-    fig.suptitle("Coverage Gap of Shift-Aware Conformal Baselines", fontsize=23, weight="bold", y=0.995)
-    fig.text(0.5, 0.945, "Bars left of zero under-cover; bars at or right of zero meet the 90% marginal coverage target.", ha="center", fontsize=13, weight="bold")
-    fig.tight_layout(rect=(0, 0, 1, 0.93), w_pad=3.0)
+    heatmap = summary.pivot(index="method_label", columns="target_dataset", values="coverage")
+    heatmap = heatmap.reindex(method_order)[["NHANES", "Pima"]]
+    annot = heatmap.map(lambda value: f"{value:.3f}" if pd.notna(value) else "")
+
+    fig, ax = plt.subplots(figsize=(13, 8.5))
+    cmap = sns.diverging_palette(10, 130, as_cmap=True)
+    sns.heatmap(
+        heatmap,
+        annot=annot,
+        fmt="",
+        cmap=cmap,
+        center=PRIMARY_CONFIDENCE,
+        vmin=0.74,
+        vmax=0.91,
+        linewidths=2.5,
+        linecolor="white",
+        cbar_kws={"label": "Mean marginal coverage"},
+        annot_kws={"fontsize": 16, "weight": "bold"},
+        ax=ax,
+    )
+    ax.set_title("Shift-Aware Conformal Baseline Coverage at 90% Confidence", fontsize=20, weight="bold", pad=18)
+    ax.set_xlabel("External target dataset", fontsize=16, labelpad=12)
+    ax.set_ylabel("Conformal method", fontsize=16, labelpad=12)
+    ax.tick_params(axis="x", labelsize=15, rotation=0)
+    ax.tick_params(axis="y", labelsize=14, rotation=0, length=0)
+    ax.text(
+        0.5,
+        -0.13,
+        "Green cells are closer to or above nominal 90% marginal coverage; red cells indicate stronger undercoverage.",
+        transform=ax.transAxes,
+        ha="center",
+        va="top",
+        fontsize=13,
+    )
+    fig.tight_layout()
     fig.savefig(paths["figures"] / "figure_shift_aware_conformal_baselines.png", dpi=dpi)
     plt.close(fig)
 
@@ -1343,23 +1348,55 @@ def plot_source_trust_stress(source_trust_stress: pd.DataFrame, paths: dict[str,
         set_size=("average_prediction_set_size", "mean"),
     )
     sns.set_theme(style="whitegrid", context="talk")
-    fig, axes = plt.subplots(1, 2, figsize=(18, 7), sharey=False)
+    fig, axes = plt.subplots(1, 2, figsize=(18, 8), sharey=True)
+    legend_lines = []
+    legend_labels = []
     for ax, target in zip(axes, ["NHANES", "Pima"]):
-        sub = summary.loc[summary["target_dataset"].eq(target)]
-        ax.plot(sub["target_mix_fraction"], sub["source_weight"], marker="o", linewidth=2.5, label="Source trust weight")
-        ax.set_title(target)
-        ax.set_xlabel("Target fraction in simulated calibration/test data")
+        sub = summary.loc[summary["target_dataset"].eq(target)].sort_values("target_mix_fraction")
+        line1 = ax.plot(
+            sub["target_mix_fraction"],
+            sub["source_weight"],
+            marker="o",
+            markersize=9,
+            linewidth=3.0,
+            color="#4C78A8",
+            label="Source trust weight",
+        )
+        ax.set_title(target, fontsize=20, weight="bold")
+        ax.set_xlabel("Target fraction in simulated target mixture")
         ax.set_ylabel("Source trust weight")
+        ax.set_ylim(0, max(0.052, float(summary["source_weight"].max()) * 1.15))
         ax.tick_params(axis="both", labelsize=13)
+        ax.grid(axis="y", alpha=0.25)
         ax2 = ax.twinx()
-        ax2.plot(sub["target_mix_fraction"], sub["coverage"], marker="s", linewidth=2.5, color="#F58518", label="Marginal coverage")
-        ax2.plot(sub["target_mix_fraction"], sub["diabetes_coverage"], marker="^", linewidth=2.5, color="#54A24B", label="Diabetes coverage")
-        ax2.axhline(PRIMARY_CONFIDENCE, color="black", linestyle="--", linewidth=1.8)
+        line2 = ax2.plot(
+            sub["target_mix_fraction"],
+            sub["coverage"],
+            marker="s",
+            markersize=8,
+            linewidth=3.0,
+            color="#F58518",
+            label="Marginal coverage",
+        )
+        line3 = ax2.plot(
+            sub["target_mix_fraction"],
+            sub["diabetes_coverage"],
+            marker="^",
+            markersize=9,
+            linewidth=3.0,
+            color="#54A24B",
+            label="Diabetes coverage",
+        )
+        line4 = ax2.axhline(PRIMARY_CONFIDENCE, color="black", linestyle="--", linewidth=2.2, label="90% target")
         ax2.set_ylabel("Coverage")
-        lines, labels = ax.get_legend_handles_labels()
-        lines2, labels2 = ax2.get_legend_handles_labels()
-        ax2.legend(lines + lines2, labels + labels2, fontsize=10, loc="best", frameon=True)
-    fig.tight_layout()
+        ax2.set_ylim(0, 1.0)
+        ax2.tick_params(axis="y", labelsize=13)
+        if not legend_lines:
+            legend_lines = line1 + line2 + line3 + [line4]
+            legend_labels = [line.get_label() for line in legend_lines]
+    fig.suptitle("Source-Trust Stress Test Under Simulated Source-Target Mixture Shift", fontsize=22, weight="bold", y=0.995)
+    fig.legend(legend_lines, legend_labels, loc="upper center", ncol=4, frameon=True, bbox_to_anchor=(0.5, 0.94), fontsize=12)
+    fig.tight_layout(rect=(0, 0, 1, 0.88))
     fig.savefig(paths["figures"] / "figure_source_trust_stress_test.png", dpi=dpi)
     plt.close(fig)
 
