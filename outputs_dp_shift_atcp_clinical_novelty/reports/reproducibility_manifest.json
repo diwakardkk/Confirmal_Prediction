@@ -1,0 +1,151 @@
+{
+  "seed": 42,
+  "input_dir": "/Users/prabhavkumar/Diwakar/Confirmal_prediction/Final_mycode_CP/adaptive_transport_calibration_experiment/outputs_full_5models",
+  "outdir": "/Users/prabhavkumar/Diwakar/Confirmal_prediction/Final_mycode_CP/adaptive_transport_calibration_experiment/outputs_dp_shift_atcp_clinical_novelty",
+  "target_splits": [
+    {
+      "dataset": "Kaggle",
+      "split": "source_train",
+      "n": 57676,
+      "class_0": 52587,
+      "class_1": 5089,
+      "diabetes_prevalence": 0.08823427422151328,
+      "random_seed": 42,
+      "stratified_by": "diabetes"
+    },
+    {
+      "dataset": "Kaggle",
+      "split": "source_calibration",
+      "n": 19226,
+      "class_0": 17529,
+      "class_1": 1697,
+      "diabetes_prevalence": 0.08826588994070529,
+      "random_seed": 42,
+      "stratified_by": "diabetes"
+    },
+    {
+      "dataset": "Kaggle",
+      "split": "source_internal_test",
+      "n": 19226,
+      "class_0": 17530,
+      "class_1": 1696,
+      "diabetes_prevalence": 0.0882138770415063,
+      "random_seed": 42,
+      "stratified_by": "diabetes"
+    },
+    {
+      "dataset": "NHANES",
+      "split": "target_calibration",
+      "n": 1145,
+      "class_0": 944,
+      "class_1": 201,
+      "diabetes_prevalence": 0.17554585152838428,
+      "random_seed": 42,
+      "stratified_by": "diabetes"
+    },
+    {
+      "dataset": "NHANES",
+      "split": "target_test",
+      "n": 1146,
+      "class_0": 944,
+      "class_1": 202,
+      "diabetes_prevalence": 0.1762652705061082,
+      "random_seed": 42,
+      "stratified_by": "diabetes"
+    },
+    {
+      "dataset": "Pima",
+      "split": "target_calibration",
+      "n": 384,
+      "class_0": 250,
+      "class_1": 134,
+      "diabetes_prevalence": 0.3489583333333333,
+      "random_seed": 42,
+      "stratified_by": "diabetes"
+    },
+    {
+      "dataset": "Pima",
+      "split": "target_test",
+      "n": 384,
+      "class_0": 250,
+      "class_1": 134,
+      "diabetes_prevalence": 0.3489583333333333,
+      "random_seed": 42,
+      "stratified_by": "diabetes"
+    }
+  ],
+  "shift_aware_baselines": [
+    "label_shift_adjusted",
+    "target_only_conformal",
+    "importance_weighted_source_conformal",
+    "adaptive_transport_conformal",
+    "weighted_target_dominant_atcp",
+    "shift_aware_source_trust_atcp",
+    "class_conditional_weighted_atcp",
+    "risk_asymmetric_shift_atcp",
+    "dp_shift_atcp",
+    "safety_gated_atcp",
+    "safety_gated_shift_atcp",
+    "multi_objective_safety_gated_atcp",
+    "multi_objective_dp_shift_atcp"
+  ],
+  "atcp_source_weight_grid": [
+    0.0,
+    0.02,
+    0.05,
+    0.1,
+    0.2,
+    0.5,
+    1.0
+  ],
+  "eval_confidence_levels": [
+    0.8,
+    0.85,
+    0.9,
+    0.92,
+    0.95
+  ],
+  "risk_asymmetry_delta": 0.02,
+  "dp_shift_atcp": {
+    "class_0_confidence_grid": [
+      0.85,
+      0.87,
+      0.88,
+      0.89,
+      0.9
+    ],
+    "class_1_confidence_grid": [
+      0.9,
+      0.92,
+      0.94,
+      0.95,
+      0.97
+    ],
+    "selection_score": "5*abs(marginal-target)+2*diabetes_undercoverage+1.5*class_gap+0.8*set_size+0.5*clinical_cost"
+  },
+  "source_trust_stress_test": {
+    "target_mix_grid": [
+      0.0,
+      0.25,
+      0.5,
+      0.75,
+      1.0
+    ],
+    "description": "Simulated intermediate shift by mixing source and target calibration/test rows."
+  },
+  "bootstrap_repeats": 300,
+  "shift_atcp": {
+    "source_trust_inputs": [
+      "mean_psi",
+      "domain_classifier_auc",
+      "target_calibration_n",
+      "prevalence_gap"
+    ],
+    "source_weight_formula": "exp(-2*mean_psi)*exp(-3*max(domain_auc-0.5,0))*target_n^-0.5*exp(-2*prevalence_gap)"
+  },
+  "leakage_correction": {
+    "source_calibration_selection": "source calibration fit/select only",
+    "adaptive_calibration_selection": "target calibration fit/select only",
+    "final_evaluation": "target test only"
+  }
+}
