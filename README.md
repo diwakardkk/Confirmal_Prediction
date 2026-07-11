@@ -1,12 +1,20 @@
-# SHIFT-ATCP for External Diabetes Model Transportability
+# SHIFT-ATCP: Shift-Aware and Diabetes-Protected Adaptive Conformal Prediction for Reliable Diabetes Classification Under Dataset Shift
 
 This repository contains the code, result tables, figures, and manuscript material for:
 
-**SHIFT-ATCP: Shift-Aware Adaptive Transport Conformal Prediction for External Diabetes Model Transportability**
+**SHIFT-ATCP: Shift-Aware and Diabetes-Protected Adaptive Conformal Prediction for Reliable Diabetes Classification Under Dataset Shift**
 
 The study evaluates whether diabetes prediction models trained on the Kaggle Diabetes Prediction Dataset remain reliable when transported to external target populations. NHANES 2017-2018 is used as the main external validation cohort, and the Pima Indians Diabetes dataset is used as an extreme-shift stress-test cohort.
 
 The main contribution is not only higher classification performance. The repository focuses on external reliability under dataset shift: probability calibration, conformal coverage, diabetes-positive class coverage, referral behavior, and clinical cost.
+
+## Title
+
+SHIFT-ATCP: Shift-Aware and Diabetes-Protected Adaptive Conformal Prediction for Reliable Diabetes Classification Under Dataset Shift
+
+## Abstract
+
+Machine learning models for diabetes prediction often perform well in the development dataset but become less reliable when transported to a new clinical population. This study evaluates external diabetes model transportability from the Kaggle Diabetes Prediction Dataset to NHANES 2017--2018 as the main external cohort and the Pima Indians Diabetes dataset as an extreme-shift stress-test cohort. Five model families were trained on the source cohort: logistic regression, random forest, XGBoost, LightGBM, and CatBoost. Three feature sets were studied: non-invasive screening features, routine clinical features, and extended transport features. To address reviewer concerns about calibration leakage and unclear split-specific metrics, all external datasets were split into target calibration and target test partitions using stratified 50/50 sampling with random seed 42. Calibration method selection used only source calibration or target calibration-select data, and final external metrics were computed only on held-out target test sets. The revised framework introduces SHIFT-ATCP, a shift-aware target-dominant adaptive conformal method that estimates source trust from Population Stability Index (PSI), domain-classifier AUC, target calibration size, and prevalence shift. It also introduces DP-SHIFT-ATCP, a diabetes-protected variant that selects class-specific conformal thresholds to improve diabetes-positive coverage. Dataset shift was severe: mean PSI was 1.545 for NHANES and 1.897 for Pima, and domain-classifier AUC was 1.000 for both targets. The shift-aware source trust mechanism therefore assigned near-zero source weights. Conventional unweighted ATCP undercovered both targets, with mean 90% coverage of 0.8468 on NHANES and 0.7612 on Pima. Safety-gated SHIFT-ATCP restored near-nominal marginal coverage, reaching 0.9031 on NHANES and 0.9059 on Pima. DP-SHIFT-ATCP improved diabetes-positive coverage from 0.6612 to 0.9090 on NHANES and from 0.8092 to 0.9280 on Pima, with larger prediction sets and referral rates. These results show that external diabetes model reliability requires not only discrimination and calibration but also target-aware conformal uncertainty, source-trust estimation, and class-wise clinical safety analysis.
 
 ## Current Paper Version
 
@@ -134,6 +142,12 @@ Conventional unweighted ATCP undercovers under shift. Safety-gated SHIFT-ATCP re
 | Pima | Safety-gated SHIFT | 0.9059 | 0.8092 | 1.4911 | 0.4911 | 1.3427 |
 | Pima | DP-SHIFT | 0.8745 | 0.9280 | 1.4750 | 0.4750 | 1.1760 |
 | Pima | Risk-asymmetric SHIFT | 0.8933 | 0.9486 | 1.5324 | 0.5324 | 1.2432 |
+
+## Important Result Figure
+
+![Clinical referral and cost profile of SHIFT-ATCP variants](outputs_dp_shift_atcp_clinical_novelty/figures/figure_shift_atcp_clinical_referral_cost.png)
+
+This figure summarizes the clinical referral and cost profile of the main SHIFT-ATCP variants. It shows that diabetes-protected methods increase uncertainty and referral when needed, but improve diabetes-positive coverage and reduce diabetes-positive undercoverage.
 
 The main interpretation is:
 
