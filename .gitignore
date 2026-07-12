@@ -7,3 +7,23 @@ __pycache__/
 *.tmp
 *.out
 *.err
+
+# Generated experiment outputs and local artifacts
+outputs*/
+overleaf*/
+*.joblib
+*.zip
+*.docx
+*.html
+
+# LaTeX source and build artifacts
+*.tex
+*.bib
+*.bbl
+*.blg
+*.aux
+*.log
+*.toc
+*.fls
+*.fdb_latexmk
+*.synctex.gz
