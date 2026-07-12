@@ -1,8 +1,0 @@
-dataset,split,n,class_0,class_1,diabetes_prevalence,random_seed,stratified_by
-Kaggle,source_train,57676,52587,5089,0.08823427422151328,42,diabetes
-Kaggle,source_calibration,19226,17529,1697,0.08826588994070529,42,diabetes
-Kaggle,source_internal_test,19226,17530,1696,0.0882138770415063,42,diabetes
-NHANES,target_calibration,1145,944,201,0.17554585152838428,42,diabetes
-NHANES,target_test,1146,944,202,0.1762652705061082,42,diabetes
-Pima,target_calibration,384,250,134,0.3489583333333333,42,diabetes
-Pima,target_test,384,250,134,0.3489583333333333,42,diabetes
