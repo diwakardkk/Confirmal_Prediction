@@ -35,16 +35,8 @@ The GitHub repository is intentionally code-focused:
 
 Generated outputs are not tracked in Git because they can become large and are reproducible from the scripts.
 
-## Ignored Generated Files
 
-The following local artifacts are ignored:
 
-- `outputs*/`
-- `overleaf*/`
-- LaTeX files such as `*.tex` and `*.bib`
-- model binaries such as `*.joblib`
-- archives such as `*.zip`
-- local report exports such as `*.docx` and `*.html`
 
 ## Run The Current Experiment
 
